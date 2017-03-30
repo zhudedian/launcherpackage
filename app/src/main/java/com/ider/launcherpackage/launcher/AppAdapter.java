@@ -2,19 +2,19 @@ package com.ider.launcherpackage.launcher;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ider.launcherpackage.R;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.level;
 
 /**
  * Created by ider-eric on 2016/12/26.
@@ -64,10 +64,13 @@ public class AppAdapter extends BaseAdapter {
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
+//            view.setLayoutParams(new GridView.LayoutParams(
+//                    android.view.ViewGroup.LayoutParams.MATCH_PARENT,(getHeight()-(1+level)*16)/level));
         }
         String pkgname = data.get(i).getPackageName();
         holder.image.setImageDrawable(getPackageDrawable(pkgname));
         holder.text.setText(getPackageText(pkgname));
+
 
         return view;
     }

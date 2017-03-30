@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">LauncherPackage</string>
+    <string name="shortcut_default_title">Add</string>
+    <string name="app_select_title">Choose the App you want to add</string>
+    <string name="shortcut_edit_replace">Replace</string>
+    <string name="shortcut_edit_delete">Delete</string>
+
+    <string name="applications">Applications</string>
+    <string name="kodi">Kodi</string>
+    <string name="youtube">Youtube</string>
+    <string name="googleplay">Google Play</string>
+    <string name="appstore">AppStore</string>
+    <string name="mediacenter">Media Center</string>
+    <string name="setting">Settings</string>
+    <string name="file">Files</string>
+    <string name="favorite">Favorite</string>
+
+    <string name="AppListLongTip">Press menu key to select more</string>
+    <string name="app_op_clear_data">Clear Data</string>
+    <string name="app_op_force_stop">Force Stop</string>
+    <string name="app_op_uninstall">Uninstall</string>
+
+    <string name="app_data_cleaned">Data has been cleaned</string>
+    <string name="app_data_forced"> has been stop</string>
+    <string name="havent_notice">App does not exist</string>
+
+</resources>

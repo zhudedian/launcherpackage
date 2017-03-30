@@ -86,4 +86,13 @@ public class DbManager {
         }
     }
 
+    public void removeAll(){
+        synchronized (DbManager.class) {
+            DaoMaster master = new DaoMaster(getWritableDatabase());
+            DaoSession session = master.newSession();
+            PackageHolderDao dao = session.getPackageHolderDao();
+            dao.deleteAll();
+        }
+    }
+
 }

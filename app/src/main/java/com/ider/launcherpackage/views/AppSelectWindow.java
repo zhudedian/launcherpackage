@@ -1,35 +1,36 @@
 package com.ider.launcherpackage.views;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 
-import com.ider.launcherpackage.launcher.AppAdapter;
-import com.ider.launcherpackage.launcher.ItemEntry;
 import com.ider.launcherpackage.R;
 import com.ider.launcherpackage.common.ApplicationUtil;
+import com.ider.launcherpackage.launcher.AppAdapter;
+import com.ider.launcherpackage.launcher.ItemEntry;
 import com.ider.launcherpackage.launcher.PackageHolder;
+import com.ider.launcherpackage.util.SelectAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemClickListener{
 
     private Context mContext;
-    private List<PackageHolder> allApps;
+    private List<PackageHolder> allApps,apps;
     private View baseView;
     private PopupWindow popWindow;
     private static AppSelectWindow INSTANCE;
     private OnAppSelectListener onAppSelectListener;
+    private SelectAdapter adapter;
 
     public interface OnAppSelectListener{
-        void onAppSelected(PackageHolder holder);
+        void onAppSelected(boolean isAdd,PackageHolder holder);
     }
     public void setOnAppSelectListener(OnAppSelectListener onAppSelectListener) {
         this.onAppSelectListener = onAppSelectListener;
@@ -48,8 +49,9 @@ public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemCl
     }
 
 
-    public void showAppPopWindow(View baseView) {
+    public void showAppPopWindow(List<PackageHolder> apps,View baseView) {
         this.baseView = baseView;
+        this.apps = apps;
         View view = View.inflate(mContext, R.layout.app_select_window, null);
         view.setOnKeyListener(this);
 
@@ -66,7 +68,7 @@ public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemCl
 
     private void setupAppGrid(GridView gridView) {
         allApps = ApplicationUtil.queryApplication(mContext);
-        AppAdapter adapter = new AppAdapter(mContext, R.layout.app_select_item, allApps);
+        adapter = new SelectAdapter(mContext, R.layout.app_select_item, allApps,apps);
         gridView.setAdapter(adapter);
     }
 
@@ -74,6 +76,7 @@ public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemCl
 
     @Override
     public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+//        Log.i("selectwindow","onKey");
         if(keyCode == KeyEvent.KEYCODE_BACK) {
             this.popWindow.dismiss();
             return true;
@@ -81,18 +84,39 @@ public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemCl
         return false;
     }
 
+
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if(baseView instanceof ShortcutView) {
             ((ShortcutView) baseView).mItemEntry = new ItemEntry(allApps.get(i).getPackageName());
             ((ShortcutView) baseView).updateSelf();
             ((ShortcutView) baseView).save();
+            popWindow.dismiss();
         } else if(baseView instanceof GridView) {
             if(onAppSelectListener != null) {
-                onAppSelectListener.onAppSelected(allApps.get(i));
+                if (apps.contains(allApps.get(i))){
+//                    apps.remove(allApps.get(i));
+                   outer:for (int j=0;j<apps.size();j++){
+                        if (allApps.get(i).equals(apps.get(j))){
+                            Log.i("selectwindow",allApps.get(i).getPackageName());
+                            onAppSelectListener.onAppSelected(false,apps.get(j));
+                            apps.remove(j);
+                            break outer;
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+
+                }else {
+                    Log.i("selectwindow",allApps.get(i).getPackageName());
+                    onAppSelectListener.onAppSelected(true,allApps.get(i));
+                    apps.add(apps.size() - 1, allApps.get(i));
+                    adapter.notifyDataSetChanged();
+                }
+
             }
 
         }
-        popWindow.dismiss();
+//        popWindow.dismiss();
     }
 }

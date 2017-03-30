@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -38,6 +39,10 @@ public class AppListActivity extends FullscreenActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_list);
+		ActionBar actionBar= getSupportActionBar();
+		if (actionBar!=null){
+			actionBar.hide();
+		}
 
 		adapter = new AppAdapter(context, R.layout.applist_item, initApps());
 		initViews();
@@ -91,7 +96,6 @@ public class AppListActivity extends FullscreenActivity {
 	public void initViews() {
 		grid = (GridView) findViewById(R.id.app_grid);
 		grid.setAdapter(adapter);
-		tip = (TextView) findViewById(R.id.uninstall_tip);
 
 
 	}
@@ -109,14 +113,14 @@ public class AppListActivity extends FullscreenActivity {
 			}
 		});
 
-		grid.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-										   int position, long id) {
-				uninstallApp(apps.get(position).getPackageName());
-				return true;
-			}
-		});
+//		grid.setOnItemLongClickListener(new OnItemLongClickListener() {
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> parent, View view,
+//										   int position, long id) {
+//				uninstallApp(apps.get(position).getPackageName());
+//				return true;
+//			}
+//		});
 
 		grid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -150,7 +154,6 @@ public class AppListActivity extends FullscreenActivity {
 			AppOpWindow.getInstance(getApplicationContext()).showAppOpWindow(getWindow().getDecorView(), apps.get(selectPosition).getPackageName());
 			return true;
 		}
-
 		return super.onKeyDown(keyCode, event);
 	}
 }

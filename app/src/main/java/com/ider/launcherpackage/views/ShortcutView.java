@@ -120,7 +120,7 @@ public class ShortcutView extends BaseEntryView {
         if(this.appSelectWindow == null) {
             this.appSelectWindow = AppSelectWindow.getInstance(LauncherApplication.getContext());
         }
-        this.appSelectWindow.showAppPopWindow(this);
+        this.appSelectWindow.showAppPopWindow(null,this);
     }
 
 }

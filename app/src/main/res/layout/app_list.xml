@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background" >
+    android:background="@drawable/app_operate_background" >
     
     
     <GridView
@@ -13,12 +13,12 @@
         android:layout_marginTop="40dp"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="50dp"
         android:verticalSpacing="10dp"
         android:scrollbars="none"
         android:horizontalSpacing="30dp"
         android:listSelector="@drawable/selecter" />
-    
+
     <TextView
         android:id="@+id/uninstall_tip"
         android:layout_height="wrap_content"
@@ -29,5 +29,7 @@
         android:layout_alignLeft="@id/app_grid"
         android:text="@string/AppListLongTip"
         android:layout_marginBottom="20dp" />
+    
+
 
 </RelativeLayout>

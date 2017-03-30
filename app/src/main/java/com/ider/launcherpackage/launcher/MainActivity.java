@@ -15,31 +15,43 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.storage.StorageManager;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.ider.launcherfun.CleanActivity;
 import com.ider.launcherpackage.R;
 import com.ider.launcherpackage.common.IntentCreator;
+import com.ider.launcherpackage.util.SetImageView;
 import com.ider.launcherpackage.views.BaseImageView;
 import com.ider.launcherpackage.views.ShortcutFolder;
 import com.ider.launcherpackage.views.SwipeLayout;
+
 import java.io.File;
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+
+import static android.R.attr.path;
+import static android.R.attr.start;
+
 
 public class MainActivity extends FullscreenActivity {
 
     private static final String TAG = "MainActivity";
 
-    private ImageView stateWifi, stateBluetooth, stateUsb;
+    private ImageView stateWifi, stateBluetooth, stateUsb,sdcard;
     private View mainContainer;
     private BaseImageView vApps;
     private ShortcutFolder vFolder;
     private SwipeLayout functionContainer;
     private ImageView vSwipClean, vSwipeWifi, vSwipeDisplay, vSwipeAudio, vSwipeApps;
+    private BaseImageView apps,kodi,google,store,youtube,media,setting,file;
     private boolean focusFlag = true;
 
     @Override
@@ -56,6 +68,10 @@ public class MainActivity extends FullscreenActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActionBar actionBar= getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.hide();
+        }
 
         mainContainer = findViewById(R.id.content_main);
         vApps = (BaseImageView) findViewById(R.id.main_apps);
@@ -63,6 +79,16 @@ public class MainActivity extends FullscreenActivity {
         stateWifi = (ImageView) findViewById(R.id.state_wifi);
         stateBluetooth = (ImageView) findViewById(R.id.state_bluetooth);
         stateUsb = (ImageView) findViewById(R.id.state_usb);
+        sdcard = (ImageView) findViewById(R.id.sd_card);
+        apps = (BaseImageView) findViewById(R.id.main_apps);
+        kodi = (BaseImageView) findViewById(R.id.main_kodi);
+        youtube = (BaseImageView) findViewById(R.id.main_youtube);
+        file = (BaseImageView) findViewById(R.id.main_file);
+        media = (BaseImageView) findViewById(R.id.main_media);
+        google = (BaseImageView) findViewById(R.id.main_google);
+        store = (BaseImageView) findViewById(R.id.main_store);
+        setting = (BaseImageView) findViewById(R.id.main_setting);
+
 
         functionContainer = (SwipeLayout) findViewById(R.id.function_main);
         vSwipClean = (ImageView) findViewById(R.id.setting_cleanup);
@@ -73,11 +99,30 @@ public class MainActivity extends FullscreenActivity {
 
         setListeners();
         bindReceivers();
+        updateNetInfo();
         setUsbState();
+        setSdState();
+        setImage();
 
-        BluetoothManager btManager = (BluetoothManager) getSystemService(Service.BLUETOOTH_SERVICE);
-        setBtState(btManager.getAdapter().getState());
+        try {
+            BluetoothManager btManager = (BluetoothManager) getSystemService(Service.BLUETOOTH_SERVICE);
+            setBtState(btManager.getAdapter().getState());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+    private void setImage(){
+        apps.setImageBitmap(SetImageView.setLargeImageView());
+        kodi.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_kodi,getResources().getString(R.string.kodi)));
+        youtube.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.youtube)));
+        file.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.file)));
+        google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay)));
+        store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_store,getResources().getString(R.string.appstore)));
+        media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_media,getResources().getString(R.string.mediacenter)));
+        setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_setting,getResources().getString(R.string.setting)));
+    }
+
 
     private void setListeners() {
         //最右边五个快捷划开功能的回调
@@ -152,6 +197,14 @@ public class MainActivity extends FullscreenActivity {
         }
         return checkNormalUsbExists();
     }
+    private boolean isSdExists() {
+        if(Build.MANUFACTURER.toLowerCase().equals("amlogic")) {
+            if(Build.VERSION.SDK_INT >= 23) {
+                return checkAmlogic6Sd();
+            }
+        }
+        return checkNormalSdExists();
+    }
 
     private void setBtState(int state) {
         switch (state) {
@@ -191,8 +244,21 @@ public class MainActivity extends FullscreenActivity {
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
         filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
+
+//        filter.addAction(Intent.ACTION_MEDIA_SHARED);
+//        filter.addAction(Intent.ACTION_MEDIA_CHECKING);
+//        filter.addAction(Intent.ACTION_MEDIA_NOFS);
+//        filter.addAction(Intent.ACTION_MEDIA_BUTTON);
+//        filter.addAction(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//
+//        filter.addAction(Intent.ACTION_MEDIA_REMOVED);
+//        filter.addAction(Intent.ACTION_MEDIA_EJECT);
+//        filter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
+//        filter.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
+//        filter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         filter.addDataScheme("file");
         registerReceiver(mediaReciever, filter);
+
 
         filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -218,7 +284,7 @@ public class MainActivity extends FullscreenActivity {
     BroadcastReceiver netReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-//            updateNetInfo();
+            updateNetInfo();
         }
     };
 
@@ -250,9 +316,32 @@ public class MainActivity extends FullscreenActivity {
     BroadcastReceiver mediaReciever = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            setUsbState();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setUsbState();
+                    setSdState();
+                }
+            },1000);
+
+
+//                String path = intent.getDataString();
+//                String pathString = path.split("file://")[1];
+//            Log.i(TAG,"ggggggggg");
+//                Log.i(TAG,pathString);
+
+
+
         }
     };
+    private void setSdState(){
+        if (isSdExists()){
+            sdcard.setVisibility(View.VISIBLE);
+        }else {
+            sdcard.setVisibility(View.GONE);
+        }
+    }
+
 
     BroadcastReceiver btReceiver = new BroadcastReceiver() {
         @Override
@@ -279,6 +368,7 @@ public class MainActivity extends FullscreenActivity {
             Method getType = VolumeInfo.getMethod("getType");
             Method getDisk = VolumeInfo.getMethod("getDisk");
 
+
             Method isUsb = DiskInfo.getMethod("isUsb");
             Method getDescription = DiskInfo.getMethod("getDescription");
             List volumes = (List) getVolumes.invoke(mStorageManager);
@@ -300,16 +390,113 @@ public class MainActivity extends FullscreenActivity {
 
         return false;
     }
+    private boolean checkAmlogic6Sd(){
+        StorageManager mStorageManager = (StorageManager) getSystemService(Service.STORAGE_SERVICE);
+        try {
+            Class StorageManager = Class.forName("android.os.storage.StorageManager");
+            Class VolumeInfo = Class.forName("android.os.storage.VolumeInfo");
+            Class DiskInfo = Class.forName("android.os.storage.DiskInfo");
 
-    private boolean checkNormalUsbExists() {
-        String[] usbPaths = {"/storage/external_storage"};
-        for (String usbPath : usbPaths) {
-            File dir = new File(usbPath);
-            if (dir.exists() && dir.isDirectory()) {
-                if (dir.listFiles() != null) {
-                    return true;
+            Method getVolumes = StorageManager.getMethod("getVolumes");
+            Method isMountedReadable = VolumeInfo.getMethod("isMountedReadable");
+            Method getType = VolumeInfo.getMethod("getType");
+            Method getDisk = VolumeInfo.getMethod("getDisk");
+
+
+            Method isSd = DiskInfo.getMethod("isSd");
+            Method getDescription = DiskInfo.getMethod("getDescription");
+            List volumes = (List) getVolumes.invoke(mStorageManager);
+            Log.i(TAG, "isSdExists: " );
+            for(int i = 0; i < volumes.size(); i++) {
+                if(volumes.get(i) != null && (boolean) isMountedReadable.invoke(volumes.get(i))
+                        && (int) getType.invoke(volumes.get(i)) == 0) {
+                    Object diskInfo = getDisk.invoke(volumes.get(i));
+
+                    boolean sdExists = (boolean) isSd.invoke(diskInfo);
+                    String description = (String) getDescription.invoke(diskInfo);
+                    Log.i(TAG, "isSdExists: " + sdExists + ":" + description);
+                    if(sdExists) {
+                        return true;
+                    }
                 }
             }
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    private boolean checkNormalSdExists(){
+        if (checkSd()){
+            return true;
+        }else if (checkSdS805()){
+            return true;
+        }
+        return false;
+    }
+    private boolean checkNormalUsbExists(){
+        if (checkUsb1()||checkUsb2()){
+            return true;
+        }else if (checkUsbS805()){
+            return true;
+        }
+        return false;
+    }
+    private boolean checkUsbS805(){
+        String usb1_path = "/storage/external_storage/sda1";
+        if (usb1_path != null) {
+            File usb1 = new File(usb1_path);
+            if (usb1.exists()&&usb1.getTotalSpace()>0 ) {
+                return true;
+            }else return false;
+        }
+        return false;
+//        File us = new File(usb1_path);
+//        File[] files = us.listFiles();
+//        if (files!=null) {
+//            for (File f : files) {
+//                Log.i(TAG, f.getName());
+//            }
+//        }
+
+    }
+    private boolean checkSdS805(){
+        String usb1_path = "/storage/external_storage/sdcard1";
+        if (usb1_path != null) {
+            File usb1 = new File(usb1_path);
+            if (usb1.exists()&&usb1.getTotalSpace()>0 ) {
+                return true;
+            }else return false;
+        }
+        return false;
+    }
+
+    private boolean checkUsb1(){
+        String usb1_path = "/storage/udisk0";
+        if (usb1_path != null) {
+            File usb1 = new File(usb1_path);
+            if (usb1.exists()&&usb1.getTotalSpace()>0 ) {
+               return true;
+            }else return false;
+        }
+        return false;
+    }
+    private boolean checkUsb2(){
+        String usb2_path = "/storage/udisk1";
+        if (usb2_path != null) {
+            File usb2 = new File(usb2_path);
+            if (usb2.exists()&&usb2.getTotalSpace()>0 ) {
+                return true;
+            }else return false;
+        }
+        return false;
+    }
+    private boolean checkSd(){
+        String sd_path = "/storage/sdcard1";
+        if (sd_path != null) {
+            File sd = new File(sd_path);
+            if (sd.exists()&&sd.getTotalSpace()>0 ) {
+                return true;
+            }else return false;
         }
         return false;
     }
@@ -317,6 +504,7 @@ public class MainActivity extends FullscreenActivity {
 
     @Override
     public void onBackPressed() {
+
         if(functionContainer.isSwipeShown()) {
             vFolder.requestFocus();
         } else {

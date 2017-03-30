@@ -10,14 +10,15 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ider.launcherpackage.R;
+import com.ider.launcherpackage.common.ApplicationUtil;
+import com.ider.launcherpackage.launcher.DbManager;
 import com.ider.launcherpackage.launcher.FolderActivity;
 import com.ider.launcherpackage.launcher.PackageHolder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.ider.launcherpackage.launcher.DbManager;
 
 /**
  * Created by ider-eric on 2016/12/29.
@@ -43,7 +44,6 @@ public class ShortcutFolder extends BaseEntryView {
         LayoutInflater.from(context).inflate(R.layout.shortcut_folder_small, this);
         thumbnailGrid = (ImageView) findViewById(R.id.shortcut_folder_thumbnail_grid);
         title = (TextView) findViewById(R.id.shortcut_folder_text);
-        title.setText("Favorite");
     }
 
 
@@ -51,7 +51,15 @@ public class ShortcutFolder extends BaseEntryView {
     public void updateSelf() {
         dbManager = DbManager.getInstance(getContext());
         packages = dbManager.queryPackages((String) getTag());
-
+        List<PackageHolder> allApp= ApplicationUtil.queryApplication(getContext());
+        List<PackageHolder> removeApp= new ArrayList<>();
+        for (PackageHolder pa:packages){
+            if (!allApp.contains(pa)){
+                removeApp.add(pa);
+                dbManager.removePackage(pa);
+            }
+        }
+        packages.removeAll(removeApp);
         Bitmap bitmap = mBitmapTools.getFolderThumbnailBitmap(getContext(), packages, thumbnailGrid.getWidth(), thumbnailGrid.getHeight());
         thumbnailGrid.setImageBitmap(bitmap);
 
@@ -61,10 +69,20 @@ public class ShortcutFolder extends BaseEntryView {
     @Override
     public void setDefault() {
         ArrayList<PackageHolder> list = new ArrayList<>();
+        List<PackageHolder> allApp= ApplicationUtil.queryApplication(getContext());
         if(getTag().equals("14")) {
-            list.add(new PackageHolder("com.android.settings", "14"));
-            list.add(new PackageHolder("com.android.browser", "14"));
-            list.add(new PackageHolder("org.xbmc.kodi", "14"));
+            if (allApp.contains(new PackageHolder("com.rk_itvui.settings", "14"))) {
+                list.add(new PackageHolder("com.rk_itvui.settings", "14"));
+            }
+            if (allApp.contains(new PackageHolder("com.android.music", "14"))) {
+                list.add(new PackageHolder("com.android.music", "14"));
+            }
+            if (allApp.contains(new PackageHolder("com.android.browser", "14"))) {
+                list.add(new PackageHolder("com.android.browser", "14"));
+            }
+            if (allApp.contains(new PackageHolder("org.xbmc.kodi", "14"))) {
+                list.add(new PackageHolder("org.xbmc.kodi", "14"));
+            }
         }
         Bitmap bitmap = mBitmapTools.getFolderThumbnailBitmap(getContext(), list, thumbnailGrid.getWidth(), thumbnailGrid.getHeight());
         thumbnailGrid.setImageBitmap(bitmap);

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">LauncherPackage</string>
+    <string name="shortcut_default_title">添加</string>
+    <string name="app_select_title">請選擇要添加的應用</string>
+    <string name="shortcut_edit_replace">替換</string>
+    <string name="shortcut_edit_delete">删除</string>
+
+    <string name="applications">應用</string>
+    <string name="kodi">Kodi</string>
+    <string name="youtube">Youtube</string>
+    <string name="googleplay">Google Play</string>
+    <string name="appstore">應用市場</string>
+    <string name="mediacenter">多媒體</string>
+    <string name="setting">設置</string>
+    <string name="file">文件夾</string>
+
+    <string name="AppListLongTip">按菜單鍵更多選擇</string>
+    <string name="app_op_clear_data">清除數據</string>
+    <string name="app_op_force_stop">強制停止</string>
+    <string name="app_op_uninstall">卸載</string>
+
+    <string name="app_data_cleaned">已清除</string>
+    <string name="app_data_forced">已停止</string>
+    <string name="havent_notice">該應用不存在</string>
+
+</resources>

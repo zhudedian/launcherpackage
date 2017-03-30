@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/blur">
+    android:background="@drawable/app_operate_background">
 
     <TextView
         android:id="@+id/folder_title"
@@ -11,7 +11,7 @@
         android:layout_marginTop="80dp"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="Favorite"
+        android:text="@string/favorite"
         android:textColor="@color/colorTextGrayWhite"/>
 
     <GridView
@@ -25,7 +25,7 @@
         android:paddingTop="9dp"
         android:paddingBottom="9dp"
         android:scrollbars="none"
-        android:background="@drawable/folder_thumbnail_background"/>
+        android:background="@drawable/folder_background"/>
 
 
 </RelativeLayout>

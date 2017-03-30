@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="right"
     android:orientation="vertical"
-    android:paddingTop="100dp"
-    android:paddingBottom="100dp">
+    android:paddingTop="150dp"
+    android:paddingBottom="70dp">
 
     <ImageView
         android:id="@+id/setting_network"

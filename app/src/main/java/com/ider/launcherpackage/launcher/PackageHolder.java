@@ -31,6 +31,24 @@ public class PackageHolder {
     public PackageHolder() {
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof PackageHolder){
+            PackageHolder holder2= (PackageHolder)obj;
+            if (holder2.packageName.equals(this.packageName)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    @Override
+    public int hashCode(){
+        return 2;
+    }
+
     public String getTag() {
         return tag;
     }

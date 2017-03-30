@@ -2,6 +2,7 @@ package com.ider.launcherpackage.common;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.os.Build;
 import android.view.View;
 
 /**
@@ -15,7 +16,11 @@ public class EntryAnimation {
         PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 1.1f);
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, scaleX, scaleY);
         animator.setDuration(200);
-        view.setTranslationZ(1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            view.setTranslationZ(1);
+        }else {
+            view.bringToFront();
+        }
         return animator;
     }
 
@@ -24,7 +29,9 @@ public class EntryAnimation {
         PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.1f, 1f);
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, scaleX, scaleY);
         animator.setDuration(100);
-        view.setTranslationZ(0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            view.setTranslationZ(0);
+        }
         return animator;
     }
 

@@ -46,6 +46,25 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
             Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
             if(intent != null) {
                 getContext().startActivity(intent);
+            }else if (packageName.equals("com.droidlogic.FileBrower")){
+                intent = getContext().getPackageManager().getLaunchIntentForPackage("com.fb.FileBrower");
+                if (intent!=null) {
+                    getContext().startActivity(intent);
+                }
+            } else if (packageName.equals("com.android.tv.settings")){
+                intent = getContext().getPackageManager().getLaunchIntentForPackage("com.mbx.settingsmbox");
+                if (intent!=null) {
+                    getContext().startActivity(intent);
+                }
+            } else if (packageName.equals("com.droidlogic.mediacenter")){
+                intent = getContext().getPackageManager().getLaunchIntentForPackage("com.amlogic.mediacenter");
+                if (intent!=null) {
+                    getContext().startActivity(intent);
+                }
+            }else{
+                Toast.makeText(getContext(),getResources().getString(R.string.havent_notice),Toast.LENGTH_SHORT).show();
+                intent = new Intent(getContext(), AppListActivity.class);
+                getContext().startActivity(intent);
             }
         } else {
             Intent intent = new Intent(getContext(), AppListActivity.class);
