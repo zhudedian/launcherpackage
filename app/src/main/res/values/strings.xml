@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">LauncherPackage</string>
+    <string name="shortcut_default_title">添加</string>
+    <string name="app_select_title">请选择要添加的应用</string>
+    <string name="shortcut_edit_replace">替换</string>
+    <string name="shortcut_edit_delete">删除</string>
+
+    <string name="applications">Applications</string>
+    <string name="kodi">Kodi</string>
+    <string name="youtube">Youtube</string>
+    <string name="googleplay">Google Play</string>
+    <string name="appstore">AppStore</string>
+    <string name="mediacenter">Media Center</string>
+    <string name="setting">Settings</string>
+    <string name="file">Files</string>
+
+    <string name="AppListLongTip">Long press OK to uninstall.</string>
+    <string name="app_op_clear_data">Clear Data</string>
+    <string name="app_op_force_stop">Force Stop</string>
+    <string name="app_op_uninstall">Uninstall</string>
+
+    <string name="app_data_cleaned">Data has been cleaned</string>
+
+</resources>

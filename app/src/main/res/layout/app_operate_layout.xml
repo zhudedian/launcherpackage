@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d01d1d1d">
+
+    <LinearLayout
+        android:layout_width="440dp"
+        android:layout_height="270dp"
+        android:layout_gravity="center"
+        android:background="@drawable/app_op_background"
+        android:orientation="vertical"
+        android:paddingTop="2dp"
+        android:paddingBottom="18dp">
+
+        <TextView
+            android:id="@+id/app_op_clear_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:drawablePadding="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:focusable="true"
+            android:drawableStart="@drawable/app_op_clear_data"
+            android:text="@string/app_op_clear_data"
+            android:textColor="@android:color/white"
+            android:textSize="23sp"
+            android:background="@drawable/app_op_item1_background"/>
+
+        <TextView
+            android:id="@+id/app_op_force_stop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="100dp"
+            android:drawablePadding="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/app_op_force_stop"
+            android:text="@string/app_op_force_stop"
+            android:textColor="@android:color/white"
+            android:textSize="23sp"
+            android:background="@drawable/app_op_item2_background" />
+
+
+        <TextView
+            android:id="@+id/app_op_uninstall"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="100dp"
+            android:drawablePadding="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:text="@string/app_op_uninstall"
+            android:drawableStart="@drawable/app_op_uninstall"
+            android:textColor="@android:color/white"
+            android:textSize="23sp"
+            android:background="@drawable/app_op_item3_background" />
+    </LinearLayout>
+
+
+</FrameLayout>

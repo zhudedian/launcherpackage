@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BaseImageView">
+        <attr name="package_name" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ShortcutFolder">
+        <attr name="default_packages" format="string"/>
+    </declare-styleable>
+</resources>

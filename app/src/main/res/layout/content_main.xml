@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.ider.launcherpackage.launcher.MainActivity"
+    android:id="@+id/content_main"
+    android:layout_width="@dimen/screen_width"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/vendor_logo"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:src="@drawable/vendor_logo"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="50dp" />
+
+    <include layout="@layout/state_layout"/>
+
+    <com.ider.launcherpackage.views.BaseImageView
+        android:id="@+id/main_apps"
+        style="@style/MainItemStyle"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="370dp"
+        android:layout_height="523dp"
+        android:src="@mipmap/main_apps"
+        android:background="@drawable/item_bg"
+        android:tag="10"
+        android:nextFocusRight="@+id/main_kodi"/>
+
+    <com.ider.launcherpackage.views.BaseImageView
+        android:id="@id/main_kodi"
+        style="@style/MainItemStyle"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="307dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@mipmap/main_kodi"
+        app:package_name="org.xbmc.kodi"
+        android:background="@drawable/item_bg"
+        android:tag="11"/>
+
+    <com.ider.launcherpackage.views.BaseImageView
+        style="@style/MainItemStyle"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="529dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@mipmap/main_youtube"
+        android:tag="12"
+        app:package_name="com.google.android.youtube"
+        android:background="@drawable/item_bg"/>
+
+    <com.ider.launcherpackage.views.BaseImageView
+        style="@style/MainItemStyle"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="752dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:tag="13"
+        app:package_name="com.droidlogic.FileBrower"
+        android:src="@mipmap/main_file"
+        android:background="@drawable/item_bg"/>
+
+    <com.ider.launcherpackage.views.ShortcutFolder
+        style="@style/MainItemStyle"
+        android:id="@+id/folder14"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="974dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/item_bg"
+        android:tag="14"
+        android:nextFocusRight="@+id/setting_display"/>
+    <com.ider.launcherpackage.views.BaseImageView
+        style="@style/MainItemStyle"
+        android:layout_marginTop="362dp"
+        android:layout_marginLeft="307dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:package_name="com.android.vending"
+        android:src="@mipmap/main_googleplay"
+        android:background="@drawable/item_bg"
+        android:tag="15"/>
+
+    <com.ider.launcherpackage.views.BaseImageView
+        style="@style/MainItemStyle"
+        android:layout_marginTop="362dp"
+        android:layout_marginLeft="529dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@mipmap/main_store"
+        app:package_name="cm.aptoidetv.pt.ider_market"
+        android:background="@drawable/item_bg"
+        android:tag="16"/>
+    <com.ider.launcherpackage.views.BaseImageView
+        style="@style/MainItemStyle"
+        android:layout_marginTop="362dp"
+        android:layout_marginLeft="752dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@mipmap/main_mediacenter"
+        app:package_name="com.droidlogic.mediacenter"
+        android:background="@drawable/item_bg"
+        android:tag="17"/>
+    <com.ider.launcherpackage.views.BaseImageView
+        style="@style/MainItemStyle"
+        android:layout_marginTop="362dp"
+        android:layout_marginLeft="972dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:package_name="com.android.tv.settings"
+        android:src="@mipmap/main_settings"
+        android:background="@drawable/item_bg"
+        android:nextFocusRight="@+id/setting_apps"
+        android:tag="18"/>
+
+</FrameLayout>
