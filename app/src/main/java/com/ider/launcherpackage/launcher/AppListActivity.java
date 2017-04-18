@@ -104,8 +104,7 @@ public class AppListActivity extends FullscreenActivity {
 		grid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = getPackageManager().getLaunchIntentForPackage(apps.get(position).getPackageName());
 				if(intent != null) {
 					startActivity(intent);

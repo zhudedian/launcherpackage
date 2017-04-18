@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+
     <include layout="@layout/function_container" />
 
     <include layout="@layout/content_main" />

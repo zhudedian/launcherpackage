@@ -19,8 +19,11 @@ import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ider.launcherfun.CleanActivity;
@@ -32,13 +35,9 @@ import com.ider.launcherpackage.views.ShortcutFolder;
 import com.ider.launcherpackage.views.SwipeLayout;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-
-import static android.R.attr.path;
-import static android.R.attr.start;
 
 
 public class MainActivity extends FullscreenActivity {
@@ -53,6 +52,7 @@ public class MainActivity extends FullscreenActivity {
     private ImageView vSwipClean, vSwipeWifi, vSwipeDisplay, vSwipeAudio, vSwipeApps;
     private BaseImageView apps,kodi,google,store,youtube,media,setting,file;
     private boolean focusFlag = true;
+    private ImageView test;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -72,6 +72,19 @@ public class MainActivity extends FullscreenActivity {
         if (actionBar!=null){
             actionBar.hide();
         }
+
+//        test = (ImageView) findViewById(R.id.test);
+//        test.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast toast = Toast.makeText(MainActivity.this,"建議搭配無線滑鼠會有更好的體驗！", Toast.LENGTH_LONG);
+//                LinearLayout linearLayout = (LinearLayout) toast.getView();
+//                TextView messageTextView = (TextView) linearLayout.getChildAt(0);
+//                messageTextView.setTextSize(33);
+//                toast.setGravity(Gravity.TOP , 0, 50);
+//                toast.show();
+//            }
+//        });
 
         mainContainer = findViewById(R.id.content_main);
         vApps = (BaseImageView) findViewById(R.id.main_apps);
