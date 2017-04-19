@@ -18,8 +18,8 @@
 
     <include layout="@layout/state_layout"/>
 
-    <com.ider.launcherpackage.views.BaseImageView
-        android:id="@+id/main_apps"
+    <com.ider.launcherpackage.views.ShortcutLocal
+        android:id="@+id/main_local"
         style="@style/MainItemStyle"
         android:layout_marginTop="140dp"
         android:layout_marginLeft="15dp"
@@ -52,26 +52,25 @@
         android:background="@drawable/item_bg"/>
 
     <com.ider.launcherpackage.views.BaseImageView
-        android:id="@+id/main_file"
+        android:id="@+id/main_apps"
         style="@style/MainItemStyle"
         android:layout_marginTop="140dp"
-        android:layout_marginLeft="752dp"
+        android:layout_marginLeft="974dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:tag="13"
-        app:package_name="com.droidlogic.FileBrower"
-        android:background="@drawable/item_bg"/>
+        android:background="@drawable/item_bg"
+        android:nextFocusRight="@+id/setting_display"/>
 
     <com.ider.launcherpackage.views.ShortcutFolder
         style="@style/MainItemStyle"
         android:id="@+id/folder14"
         android:layout_marginTop="140dp"
-        android:layout_marginLeft="974dp"
+        android:layout_marginLeft="752dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:background="@drawable/item_bg"
-        android:tag="14"
-        android:nextFocusRight="@+id/setting_display"/>
+        android:tag="14" />
     <com.ider.launcherpackage.views.BaseImageView
         android:id="@+id/main_google"
         style="@style/MainItemStyle"

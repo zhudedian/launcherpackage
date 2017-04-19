@@ -12,7 +12,7 @@
     <string name="appstore">應用市場</string>
     <string name="mediacenter">多媒體</string>
     <string name="setting">設置</string>
-    <string name="file">文件夾</string>
+    <string name="local">本地</string>
 
     <string name="AppListLongTip">按菜單鍵更多選擇</string>
     <string name="app_op_clear_data">清除數據</string>

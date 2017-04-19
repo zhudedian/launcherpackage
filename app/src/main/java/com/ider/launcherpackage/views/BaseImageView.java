@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,8 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
 
     private Animator animator;
     private String packageName;
+    private String manufature;
+    private int sdkVersion;
 
     public BaseImageView(Context context) {
         this(context, null);
@@ -35,6 +38,7 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseImageView);
         this.packageName = typedArray.getString(R.styleable.BaseImageView_package_name);
         typedArray.recycle();
+        manufature = Build.MANUFACTURER.toLowerCase();
 
         setOnClickListener(this);
 
@@ -46,31 +50,50 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
         if(packageName != null) {
             Intent intent = new Intent();
             if (packageName.equals("com.android.tv.settings")) {
-                intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.MainSettings"));
-                if (intent != null) {
-                    getContext().startActivity(intent);
-                } else {
-                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.mbx.settingsmbox");
+                if(manufature.equals("Amlogic")) {
+                    intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.MainSettings"));
                     if (intent != null) {
                         getContext().startActivity(intent);
                     } else {
-                        intent = getContext().getPackageManager().getLaunchIntentForPackage("com.android.settings");
+                        intent = getContext().getPackageManager().getLaunchIntentForPackage("com.mbx.settingsmbox");
                         if (intent != null) {
                             getContext().startActivity(intent);
+                        } else {
+                            intent = getContext().getPackageManager().getLaunchIntentForPackage("com.android.settings");
+                            if (intent != null) {
+                                getContext().startActivity(intent);
+                            }
                         }
                     }
+                }else if (manufature.equals("rockchip")){
+                    intent.setComponent(new ComponentName("com.rk_itvui.settings", "com.rk_itvui.settings.Settings"));
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }
+                } else {
+                    intent.setAction("com.android.settings.Settings");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }
                 }
-            }else {
+            }else if (packageName.equals("com.droidlogic.mediacenter")) {
+                if(manufature.equals("Amlogic")) {
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.amlogic.mediacenter");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }
+                }else if (manufature.equals("rockchip")){
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.rockchip.mediacenter");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }
+                }
+            } else {
                 intent = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
                 if (intent != null) {
                     getContext().startActivity(intent);
                 } else if (packageName.equals("com.droidlogic.FileBrower")) {
                     intent = getContext().getPackageManager().getLaunchIntentForPackage("com.fb.FileBrower");
-                    if (intent != null) {
-                        getContext().startActivity(intent);
-                    }
-                } else if (packageName.equals("com.droidlogic.mediacenter")) {
-                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.amlogic.mediacenter");
                     if (intent != null) {
                         getContext().startActivity(intent);
                     }

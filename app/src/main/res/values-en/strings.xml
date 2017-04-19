@@ -5,14 +5,14 @@
     <string name="shortcut_edit_replace">Replace</string>
     <string name="shortcut_edit_delete">Delete</string>
 
-    <string name="applications">Applications</string>
+    <string name="applications">Apps List</string>
     <string name="kodi">Kodi</string>
     <string name="youtube">Youtube</string>
     <string name="googleplay">Google Play</string>
     <string name="appstore">AppStore</string>
     <string name="mediacenter">Media Center</string>
     <string name="setting">Settings</string>
-    <string name="file">Files</string>
+    <string name="local">LOCAL</string>
     <string name="favorite">Favorite</string>
 
     <string name="AppListLongTip">Press menu key to select more</string>

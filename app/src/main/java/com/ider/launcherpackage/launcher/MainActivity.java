@@ -32,12 +32,16 @@ import com.ider.launcherpackage.common.IntentCreator;
 import com.ider.launcherpackage.util.SetImageView;
 import com.ider.launcherpackage.views.BaseImageView;
 import com.ider.launcherpackage.views.ShortcutFolder;
+import com.ider.launcherpackage.views.ShortcutLocal;
 import com.ider.launcherpackage.views.SwipeLayout;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+
+import static com.ider.launcherpackage.R.string.applications;
+
 
 
 public class MainActivity extends FullscreenActivity {
@@ -50,7 +54,8 @@ public class MainActivity extends FullscreenActivity {
     private ShortcutFolder vFolder;
     private SwipeLayout functionContainer;
     private ImageView vSwipClean, vSwipeWifi, vSwipeDisplay, vSwipeAudio, vSwipeApps;
-    private BaseImageView apps,kodi,google,store,youtube,media,setting,file;
+    private BaseImageView apps,kodi,google,store,youtube,media,setting;
+    private ShortcutLocal local;
     private boolean focusFlag = true;
     private ImageView test;
 
@@ -87,6 +92,7 @@ public class MainActivity extends FullscreenActivity {
 //        });
 
         mainContainer = findViewById(R.id.content_main);
+        local = (ShortcutLocal) findViewById(R.id.main_local);
         vApps = (BaseImageView) findViewById(R.id.main_apps);
         vFolder = (ShortcutFolder) findViewById(R.id.folder14);
         stateWifi = (ImageView) findViewById(R.id.state_wifi);
@@ -96,7 +102,6 @@ public class MainActivity extends FullscreenActivity {
         apps = (BaseImageView) findViewById(R.id.main_apps);
         kodi = (BaseImageView) findViewById(R.id.main_kodi);
         youtube = (BaseImageView) findViewById(R.id.main_youtube);
-        file = (BaseImageView) findViewById(R.id.main_file);
         media = (BaseImageView) findViewById(R.id.main_media);
         google = (BaseImageView) findViewById(R.id.main_google);
         store = (BaseImageView) findViewById(R.id.main_store);
@@ -126,10 +131,9 @@ public class MainActivity extends FullscreenActivity {
     }
 
     private void setImage(){
-        apps.setImageBitmap(SetImageView.setLargeImageView());
         kodi.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_kodi,getResources().getString(R.string.kodi)));
         youtube.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.youtube)));
-        file.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.file)));
+        apps.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_apps,getResources().getString(applications)));
         google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay)));
         store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_store,getResources().getString(R.string.appstore)));
         media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_media,getResources().getString(R.string.mediacenter)));
@@ -519,9 +523,9 @@ public class MainActivity extends FullscreenActivity {
     public void onBackPressed() {
 
         if(functionContainer.isSwipeShown()) {
-            vFolder.requestFocus();
+            apps.requestFocus();
         } else {
-            vApps.requestFocus();
+            local.requestFocus();
         }
 
     }

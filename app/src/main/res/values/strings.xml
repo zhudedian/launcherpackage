@@ -12,7 +12,7 @@
     <string name="appstore">应用商店</string>
     <string name="mediacenter">多媒体</string>
     <string name="setting">设置</string>
-    <string name="file">文件夹</string>
+    <string name="local">本地</string>
     <string name="favorite">喜爱</string>
 
     <string name="AppListLongTip">按菜单键更多选择</string>
