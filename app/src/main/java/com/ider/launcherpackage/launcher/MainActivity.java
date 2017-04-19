@@ -211,6 +211,11 @@ public class MainActivity extends FullscreenActivity {
             if(Build.VERSION.SDK_INT >= 23) {
                 return checkAmlogic6Usb();
             }
+        }else if (Build.MANUFACTURER.toLowerCase().equals("rockchip")){
+            if(Build.VERSION.SDK_INT >= 23) {
+                return checkAmlogic6Usb();
+            }
+            return checkRockchipUsb();
         }
         return checkNormalUsbExists();
     }
@@ -219,6 +224,11 @@ public class MainActivity extends FullscreenActivity {
             if(Build.VERSION.SDK_INT >= 23) {
                 return checkAmlogic6Sd();
             }
+        }else if (Build.MANUFACTURER.toLowerCase().equals("rockchip")){
+            if(Build.VERSION.SDK_INT >= 23) {
+                return checkAmlogic6Sd();
+            }
+            return checkRockchipSd();
         }
         return checkNormalSdExists();
     }
@@ -370,6 +380,48 @@ public class MainActivity extends FullscreenActivity {
             }
         }
     };
+
+    private boolean checkRockchipUsb(){
+        String usb0_path = "/mnt/usb_storage/USB_DISK0/udisk0";
+        String usb1_path = "/mnt/usb_storage/USB_DISK1/udisk0";
+        String usb2_path = "/mnt/usb_storage/USB_DISK2/udisk0";
+        String usb3_path = "/mnt/usb_storage/USB_DISK3/udisk0";
+        if (usb0_path != null) {
+            File usb0 = new File(usb0_path);
+            if (usb0.exists()&&usb0.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        if (usb1_path != null) {
+            File usb1 = new File(usb1_path);
+            if (usb1.exists()&&usb1.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        if (usb2_path != null) {
+            File usb2 = new File(usb2_path);
+            if (usb2.exists()&&usb2.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        if (usb3_path != null) {
+            File usb3 = new File(usb3_path);
+            if (usb3.exists()&&usb3.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean checkRockchipSd(){
+        String usb1_path = "/mnt/external_sd";
+        if (usb1_path != null) {
+            File usb1 = new File(usb1_path);
+            if (usb1.exists()&&usb1.getTotalSpace()>0 ) {
+                return true;
+            }else return false;
+        }
+        return false;
+    }
 
 
     /* Amlogic平台6.0以上系统 */
