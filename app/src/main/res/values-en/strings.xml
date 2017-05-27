@@ -9,6 +9,9 @@
     <string name="kodi">Kodi</string>
     <string name="youtube">Youtube</string>
     <string name="googleplay">Google Play</string>
+    <string name="video">Movie</string>
+    <string name="music">Music</string>
+    <string name="picture">Photo</string>
     <string name="appstore">AppStore</string>
     <string name="mediacenter">Media Center</string>
     <string name="setting">Settings</string>

@@ -9,9 +9,13 @@
     <string name="kodi">Kodi</string>
     <string name="youtube">Youtube</string>
     <string name="googleplay">Google Play</string>
+    <string name="video">视频</string>
+    <string name="music">音乐</string>
+    <string name="picture">图片</string>
     <string name="appstore">应用商店</string>
     <string name="mediacenter">多媒体</string>
     <string name="setting">设置</string>
+    <string name="netflix">Netflix</string>
     <string name="file">文件夹</string>
     <string name="favorite">喜爱</string>
 

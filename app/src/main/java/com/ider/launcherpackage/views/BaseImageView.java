@@ -42,6 +42,7 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
         setOnClickListener(this);
 
     }
+    
 
 
     @Override
@@ -80,10 +81,38 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
                     intent = getContext().getPackageManager().getLaunchIntentForPackage("com.amlogic.mediacenter");
                     if (intent != null) {
                         getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
+                        getContext().startActivity(intent);
                     }
                 }else if (manufature.equals("rockchip")){
                     intent = getContext().getPackageManager().getLaunchIntentForPackage("com.rockchip.mediacenter");
                     if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
+                        getContext().startActivity(intent);
+                    }
+                }
+            } else if (packageName.equals("com.google.android.youtube")) {
+                if(manufature.equals("Amlogic")) {
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
+                        getContext().startActivity(intent);
+                    }
+                }else if (manufature.equals("rockchip")){
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.google.android.youtube.tv");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
                         getContext().startActivity(intent);
                     }
                 }
@@ -95,8 +124,17 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
                     intent = getContext().getPackageManager().getLaunchIntentForPackage("com.fb.FileBrower");
                     if (intent != null) {
                         getContext().startActivity(intent);
+                    }else {
+                        intent = getContext().getPackageManager().getLaunchIntentForPackage("com.android.rockchip");
+                        if (intent != null) {
+                            getContext().startActivity(intent);
+                        }else {
+                            Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                            intent = new Intent(getContext(), AppListActivity.class);
+                            getContext().startActivity(intent);
+                        }
                     }
-                } else {
+                }else {
                     Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
                     intent = new Intent(getContext(), AppListActivity.class);
                     getContext().startActivity(intent);

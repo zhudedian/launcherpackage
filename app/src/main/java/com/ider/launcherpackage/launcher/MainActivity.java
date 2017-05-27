@@ -15,16 +15,13 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ider.launcherfun.CleanActivity;
 import com.ider.launcherpackage.R;
@@ -50,7 +47,7 @@ public class MainActivity extends FullscreenActivity {
     private ShortcutFolder vFolder;
     private SwipeLayout functionContainer;
     private ImageView vSwipClean, vSwipeWifi, vSwipeDisplay, vSwipeAudio, vSwipeApps;
-    private BaseImageView apps,kodi,google,store,youtube,media,setting,file;
+    private BaseImageView apps,kodi,google,store,youtube,media,setting,netflix,file;
     private boolean focusFlag = true;
     private ImageView test;
 
@@ -72,6 +69,9 @@ public class MainActivity extends FullscreenActivity {
         if (actionBar!=null){
             actionBar.hide();
         }
+        Log.i("sdcard_path:", Environment.getExternalStorageDirectory().getPath()+"");
+        Log.i("sdcard_path:",  Environment.getDataDirectory().getPath()+"");
+        Log.i("sdcard_path:",  Environment.getExternalStorageState()+"");
 
 //        test = (ImageView) findViewById(R.id.test);
 //        test.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +88,6 @@ public class MainActivity extends FullscreenActivity {
 
         mainContainer = findViewById(R.id.content_main);
         vApps = (BaseImageView) findViewById(R.id.main_apps);
-        vFolder = (ShortcutFolder) findViewById(R.id.folder14);
         stateWifi = (ImageView) findViewById(R.id.state_wifi);
         stateBluetooth = (ImageView) findViewById(R.id.state_bluetooth);
         stateUsb = (ImageView) findViewById(R.id.state_usb);
@@ -96,6 +95,7 @@ public class MainActivity extends FullscreenActivity {
         apps = (BaseImageView) findViewById(R.id.main_apps);
         kodi = (BaseImageView) findViewById(R.id.main_kodi);
         youtube = (BaseImageView) findViewById(R.id.main_youtube);
+        netflix = (BaseImageView) findViewById(R.id.main_netflix);
         file = (BaseImageView) findViewById(R.id.main_file);
         media = (BaseImageView) findViewById(R.id.main_media);
         google = (BaseImageView) findViewById(R.id.main_google);
@@ -129,10 +129,11 @@ public class MainActivity extends FullscreenActivity {
         apps.setImageBitmap(SetImageView.setLargeImageView());
         kodi.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_kodi,getResources().getString(R.string.kodi)));
         youtube.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.youtube)));
+        netflix.setImageBitmap(SetImageView.setSmallImageView(13,getResources().getString(R.string.netflix)));
         file.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.file)));
-        google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay)));
-        store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_store,getResources().getString(R.string.appstore)));
-        media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_media,getResources().getString(R.string.mediacenter)));
+        google.setImageBitmap(SetImageView.setSmallImageView(15,getResources().getString(R.string.video)));
+        store.setImageBitmap(SetImageView.setSmallImageView(16,getResources().getString(R.string.music)));
+        media.setImageBitmap(SetImageView.setSmallImageView(17,getResources().getString(R.string.picture)));
         setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_setting,getResources().getString(R.string.setting)));
     }
 
@@ -207,6 +208,11 @@ public class MainActivity extends FullscreenActivity {
             if(Build.VERSION.SDK_INT >= 23) {
                 return checkAmlogic6Usb();
             }
+        }else if (Build.MANUFACTURER.toLowerCase().equals("rockchip")){
+            if(Build.VERSION.SDK_INT >= 23) {
+                return checkAmlogic6Usb();
+            }
+            return checkRockchipUsb();
         }
         return checkNormalUsbExists();
     }
@@ -215,9 +221,15 @@ public class MainActivity extends FullscreenActivity {
             if(Build.VERSION.SDK_INT >= 23) {
                 return checkAmlogic6Sd();
             }
+        }else if (Build.MANUFACTURER.toLowerCase().equals("rockchip")){
+            if(Build.VERSION.SDK_INT >= 23) {
+                return checkAmlogic6Sd();
+            }
+            return checkRockchipSd();
         }
         return checkNormalSdExists();
     }
+
 
     private void setBtState(int state) {
         switch (state) {
@@ -367,6 +379,47 @@ public class MainActivity extends FullscreenActivity {
         }
     };
 
+    private boolean checkRockchipUsb(){
+        String usb0_path = "/mnt/usb_storage/USB_DISK0/udisk0";
+        String usb1_path = "/mnt/usb_storage/USB_DISK1/udisk0";
+        String usb2_path = "/mnt/usb_storage/USB_DISK2/udisk0";
+        String usb3_path = "/mnt/usb_storage/USB_DISK3/udisk0";
+        if (usb0_path != null) {
+            File usb0 = new File(usb0_path);
+            if (usb0.exists()&&usb0.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        if (usb1_path != null) {
+            File usb1 = new File(usb1_path);
+            if (usb1.exists()&&usb1.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        if (usb2_path != null) {
+            File usb2 = new File(usb2_path);
+            if (usb2.exists()&&usb2.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        if (usb3_path != null) {
+            File usb3 = new File(usb3_path);
+            if (usb3.exists()&&usb3.getTotalSpace()>0 ) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean checkRockchipSd(){
+        String usb1_path = "/mnt/external_sd";
+        if (usb1_path != null) {
+            File usb1 = new File(usb1_path);
+            if (usb1.exists()&&usb1.getTotalSpace()>0 ) {
+                return true;
+            }else return false;
+        }
+        return false;
+    }
 
     /* Amlogic平台6.0以上系统 */
     private boolean checkAmlogic6Usb() {
@@ -519,7 +572,7 @@ public class MainActivity extends FullscreenActivity {
     public void onBackPressed() {
 
         if(functionContainer.isSwipeShown()) {
-            vFolder.requestFocus();
+            file.requestFocus();
         } else {
             vApps.requestFocus();
         }

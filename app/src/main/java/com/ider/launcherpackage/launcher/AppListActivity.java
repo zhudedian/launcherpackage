@@ -151,6 +151,7 @@ public class AppListActivity extends FullscreenActivity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(keyCode == KeyEvent.KEYCODE_MENU) {
 			AppOpWindow.getInstance(getApplicationContext()).showAppOpWindow(getWindow().getDecorView(), apps.get(selectPosition).getPackageName());
+			Log.i("applistactivity",apps.get(selectPosition).getPackageName());
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

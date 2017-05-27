@@ -52,25 +52,26 @@
         android:background="@drawable/item_bg"/>
 
     <com.ider.launcherpackage.views.BaseImageView
-        android:id="@+id/main_file"
+        android:id="@+id/main_netflix"
         style="@style/MainItemStyle"
         android:layout_marginTop="140dp"
         android:layout_marginLeft="752dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:tag="13"
-        app:package_name="com.droidlogic.FileBrower"
+        app:package_name="com.netflix.mediaclient"
         android:background="@drawable/item_bg"/>
 
-    <com.ider.launcherpackage.views.ShortcutFolder
+    <com.ider.launcherpackage.views.BaseImageView
         style="@style/MainItemStyle"
-        android:id="@+id/folder14"
+        android:id="@+id/main_file"
         android:layout_marginTop="140dp"
         android:layout_marginLeft="974dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:background="@drawable/item_bg"
         android:tag="14"
+        app:package_name="com.droidlogic.FileBrower"
         android:nextFocusRight="@+id/setting_display"/>
     <com.ider.launcherpackage.views.BaseImageView
         android:id="@+id/main_google"
@@ -79,7 +80,7 @@
         android:layout_marginLeft="307dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="com.android.vending"
+        app:package_name="android.rk.RockVideoPlayer"
         android:background="@drawable/item_bg"
         android:tag="15"/>
 
@@ -90,7 +91,7 @@
         android:layout_marginLeft="529dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="cm.aptoidetv.pt.ider_market"
+        app:package_name="com.android.music"
         android:background="@drawable/item_bg"
         android:tag="16"/>
     <com.ider.launcherpackage.views.BaseImageView
@@ -100,7 +101,7 @@
         android:layout_marginLeft="752dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="com.droidlogic.mediacenter"
+        app:package_name="com.android.gallery3d"
         android:background="@drawable/item_bg"
         android:tag="17"/>
     <com.ider.launcherpackage.views.BaseImageView

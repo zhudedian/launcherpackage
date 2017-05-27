@@ -9,6 +9,9 @@
     <string name="kodi">Kodi</string>
     <string name="youtube">Youtube</string>
     <string name="googleplay">Google Play</string>
+    <string name="video">視頻</string>
+    <string name="music">音樂</string>
+    <string name="picture">圖片</string>
     <string name="appstore">應用市場</string>
     <string name="mediacenter">多媒體</string>
     <string name="setting">設置</string>

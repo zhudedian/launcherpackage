@@ -18,15 +18,13 @@
 
         <activity android:name=".launcher.MainActivity"
             android:screenOrientation="sensorLandscape">
-            <intent-filter android:priority="1000">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name=".launcher.FolderActivity"/>
-
         <activity android:name=".launcher.AppListActivity"/>
         <activity android:name="com.ider.launcherfun.CleanActivity"/>
     </application>
