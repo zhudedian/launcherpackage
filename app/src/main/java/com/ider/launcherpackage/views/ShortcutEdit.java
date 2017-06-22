@@ -24,6 +24,7 @@ public class ShortcutEdit implements View.OnKeyListener, View.OnClickListener {
         return INSTANCE;
     }
 
+
     public void showEditWindow(ShortcutView baseView) {
         this.baseView = baseView;
         View view = View.inflate(mContext, R.layout.shortcut_edit_window, null);

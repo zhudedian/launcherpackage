@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LauncherPackage</string>
+    <string name="app_name">FreeClick</string>
     <string name="shortcut_default_title">添加</string>
     <string name="app_select_title">请选择要添加的应用</string>
     <string name="shortcut_edit_replace">替换</string>
@@ -23,5 +23,8 @@
     <string name="app_data_cleaned">已清除</string>
     <string name="app_data_forced">已停止</string>
     <string name="havent_notice">该应用不存在</string>
+
+    <string name="CleanMaster">CleanUp</string>
+    <string name="CleanedMemory">Cleaned up:%1$s MB \tAvailable:%2$s M</string>
 
 </resources>

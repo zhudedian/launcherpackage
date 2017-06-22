@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LauncherPackage</string>
+    <string name="app_name">FreeClick</string>
     <string name="shortcut_default_title">Add</string>
     <string name="app_select_title">Choose the App you want to add</string>
     <string name="shortcut_edit_replace">Replace</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LauncherPackage</string>
+    <string name="app_name">FreeClick</string>
     <string name="shortcut_default_title">添加</string>
     <string name="app_select_title">請選擇要添加的應用</string>
     <string name="shortcut_edit_replace">替換</string>

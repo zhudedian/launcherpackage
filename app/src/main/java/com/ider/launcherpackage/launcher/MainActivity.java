@@ -19,15 +19,11 @@ import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.ider.launcherfun.CleanActivity;
 import com.ider.launcherpackage.R;
+import com.ider.launcherpackage.clean.CleanActivity;
 import com.ider.launcherpackage.common.IntentCreator;
 import com.ider.launcherpackage.util.SetImageView;
 import com.ider.launcherpackage.views.BaseImageView;
@@ -38,6 +34,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.TimerTask;
 
 
 public class MainActivity extends FullscreenActivity {
@@ -72,6 +69,16 @@ public class MainActivity extends FullscreenActivity {
         if (actionBar!=null){
             actionBar.hide();
         }
+
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                /**
+                 *要执行的操作
+                 */
+            }
+        };
+
 
 //        test = (ImageView) findViewById(R.id.test);
 //        test.setOnClickListener(new View.OnClickListener() {
