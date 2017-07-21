@@ -25,7 +25,7 @@ public class ApplicationUtil {
         List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, 0);
         for (ResolveInfo resolveInfo : resolveInfos) {
             String packageName = resolveInfo.activityInfo.applicationInfo.packageName;
-            if (!packageName.equals("com.ider.launcherpackage")&&!packageName.equals("com.ider.tools")&&!packageName.equals("com.ider.boxlauncher_3368")) {
+            if (!packageName.equals("com.ider.launcherpackage")&&!packageName.equals("com.ider.boxlauncher_3368")) {
                 enties.add(new PackageHolder(packageName, null));
             }
         }

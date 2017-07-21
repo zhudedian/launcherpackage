@@ -23,6 +23,7 @@ public class AppOpWindow implements View.OnKeyListener,View.OnClickListener{
     private PopupWindow popupWindow;
     private String packageName;
 
+
     private static AppOpWindow editorWindow;
     private AppOpWindow(Context context) {
         this.context = context;

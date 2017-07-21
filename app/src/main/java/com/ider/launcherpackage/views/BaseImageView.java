@@ -60,20 +60,52 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
                         }
                     }
                 }
-            }else {
+            }else if (packageName.equals("com.droidlogic.FileBrower")) {
+                intent = getContext().getPackageManager().getLaunchIntentForPackage("com.droidlogic.FileBrower");
+                if (intent != null) {
+                    getContext().startActivity(intent);
+                }else {
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.android.rockchip");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
+                        getContext().startActivity(intent);
+                    }
+                }
+            }else if (packageName.equals("com.droidlogic.mediacenter")) {
+                intent = getContext().getPackageManager().getLaunchIntentForPackage("com.droidlogic.mediacenter");
+                if (intent != null) {
+                    getContext().startActivity(intent);
+                }else {
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.rockchip.mediacenter");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
+                        getContext().startActivity(intent);
+                    }
+                }
+            }else if (packageName.equals("com.google.android.youtube")) {
+                intent = getContext().getPackageManager().getLaunchIntentForPackage("com.google.android.youtube");
+                if (intent != null) {
+                    getContext().startActivity(intent);
+                }else {
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.google.android.youtube.tv");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
+                        getContext().startActivity(intent);
+                    }
+                }
+            }  else {
                 intent = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
                 if (intent != null) {
                     getContext().startActivity(intent);
-                } else if (packageName.equals("com.droidlogic.FileBrower")) {
-                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.fb.FileBrower");
-                    if (intent != null) {
-                        getContext().startActivity(intent);
-                    }
-                } else if (packageName.equals("com.droidlogic.mediacenter")) {
-                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.amlogic.mediacenter");
-                    if (intent != null) {
-                        getContext().startActivity(intent);
-                    }
                 } else {
                     Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
                     intent = new Intent(getContext(), AppListActivity.class);

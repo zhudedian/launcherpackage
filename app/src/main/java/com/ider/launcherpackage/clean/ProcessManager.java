@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ider.launcherpackage.R;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class ProcessManager {
     }
 
     public static long getAvailableMemory(Context context) {
-        ActivityManager manager = (ActivityManager)context.getSystemService("activity");
+        ActivityManager manager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         manager.getMemoryInfo(mi);
         return mi.availMem;
@@ -32,7 +34,7 @@ public class ProcessManager {
 
     public static void cleanMemory(Context context, boolean forceStop) {
         Log.i("ProcessManager", "cleanMemory: ");
-        ActivityManager manager = (ActivityManager)context.getSystemService("activity");
+        ActivityManager manager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
         List list = manager.getRunningAppProcesses();
 
         for(int i = 0; i < list.size(); ++i) {
@@ -50,13 +52,13 @@ public class ProcessManager {
     }
 
     public static void killProcess(Context context, String pkgName) {
-        ActivityManager manager = (ActivityManager)context.getSystemService("activity");
+        ActivityManager manager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
         new ActivityManager.MemoryInfo();
         manager.killBackgroundProcesses(pkgName);
     }
 
     public static List<String> getRunningProcess(Context context) {
-        ActivityManager manager = (ActivityManager)context.getSystemService("activity");
+        ActivityManager manager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
         ArrayList list = new ArrayList();
         List infos = manager.getRunningAppProcesses();
         PackageManager pkgManager = context.getPackageManager();
@@ -75,7 +77,7 @@ public class ProcessManager {
     }
 
     public static void forceStop(Context context, String packageName) {
-        ActivityManager mActivityManager = (ActivityManager)context.getSystemService("activity");
+        ActivityManager mActivityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
 
         try {
             Method e = Class.forName("android.app.ActivityManager").getMethod("forceStopPackage", new Class[]{String.class});
@@ -94,7 +96,7 @@ public class ProcessManager {
         }
 
         forceStop(context, packageName);
-        Toast.makeText(context, com.ider.launcherfun.R.string.app_data_cleaned, 0).show();
+        Toast.makeText(context, R.string.app_data_cleaned, Toast.LENGTH_SHORT).show();
     }
 
     private static void execCommand(String command) throws IOException {

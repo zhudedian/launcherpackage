@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.ider.launcherpackage.R;
 
-import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -73,8 +72,8 @@ public class ProcessManager {
     public static void forceStop(Context context, String packageName) {
         ActivityManager mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         try {
-            Method method = Class.forName("android.app.ActivityManager").getMethod("forceStopPackage", String.class);
-            method.invoke(mActivityManager, packageName);  //packageName是需要强制停止的应用程序包名
+            Method method = Class.forName("android.app.ActivityManager").getMethod("forceStopPackage",  new Class[]{String.class});
+            method.invoke(mActivityManager,new Object[]{packageName});  //packageName是需要强制停止的应用程序包名
         } catch (Exception e) {
             e.printStackTrace();
         }
