@@ -138,8 +138,8 @@ public class MainActivity extends FullscreenActivity {
         youtube.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.youtube)));
         file.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.file)));
         google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay)));
-        store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_store,getResources().getString(R.string.appstore)));
-        media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_media,getResources().getString(R.string.mediacenter)));
+        store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_browser,getResources().getString(R.string.browser)));
+        media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_netflix,getResources().getString(R.string.netflix)));
         setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_setting,getResources().getString(R.string.setting)));
     }
 

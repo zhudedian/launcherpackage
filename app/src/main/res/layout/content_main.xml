@@ -12,7 +12,7 @@
         android:id="@+id/vendor_logo"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:src="@drawable/vendor_logo"
+        android:src="@drawable/hyfai_logo"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="50dp" />
 
@@ -90,7 +90,7 @@
         android:layout_marginLeft="529dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="cm.aptoidetv.pt.ider_market"
+        app:package_name="com.android.browser"
         android:background="@drawable/item_bg"
         android:tag="16"/>
     <com.ider.launcherpackage.views.BaseImageView
@@ -100,7 +100,7 @@
         android:layout_marginLeft="752dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="com.droidlogic.mediacenter"
+        app:package_name="com.netflix.mediaclient"
         android:background="@drawable/item_bg"
         android:tag="17"/>
     <com.ider.launcherpackage.views.BaseImageView

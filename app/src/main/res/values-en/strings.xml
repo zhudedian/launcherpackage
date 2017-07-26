@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FreeClick</string>
+    <string name="app_name">HYFAI</string>
     <string name="shortcut_default_title">Add</string>
     <string name="app_select_title">Choose the App you want to add</string>
     <string name="shortcut_edit_replace">Replace</string>
@@ -12,7 +12,9 @@
     <string name="appstore">AppStore</string>
     <string name="mediacenter">Media Center</string>
     <string name="setting">Settings</string>
-    <string name="file">Files</string>
+    <string name="netflix">NETFLIX</string>
+    <string name="browser">Browser</string>
+    <string name="file">File Manager</string>
     <string name="favorite">Favorite</string>
 
     <string name="AppListLongTip">Press menu key to select more</string>

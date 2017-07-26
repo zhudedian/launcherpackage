@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FreeClick</string>
+    <string name="app_name">HYFAI</string>
     <string name="shortcut_default_title">添加</string>
     <string name="app_select_title">请选择要添加的应用</string>
     <string name="shortcut_edit_replace">替换</string>
@@ -12,6 +12,8 @@
     <string name="appstore">应用商店</string>
     <string name="mediacenter">多媒体</string>
     <string name="setting">设置</string>
+    <string name="netflix">NETFLIX</string>
+    <string name="browser">Browser</string>
     <string name="file">文件夹</string>
     <string name="favorite">喜爱</string>
 

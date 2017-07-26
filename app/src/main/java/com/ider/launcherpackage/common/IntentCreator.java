@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 /**
  * Created by ider-eric on 2017/2/24.
@@ -42,7 +43,11 @@ public class IntentCreator {
     public Intent createDisplayIntent() {
         Intent intent = new Intent();
         if(manufature.equals("amlogic")) {
-            if(sdkVersion >= 21) {
+            Log.i("tag",sdkVersion+"");
+            if (sdkVersion>=25){
+                intent.setComponent(new ComponentName("com.droidlogic.tv.settings", "com.droidlogic.tv.settings.display.DisplayActivity"));
+            }else if(sdkVersion >= 21) {
+
                 intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.device.display.DisplayActivity"));
             } else {
                 intent.setComponent(new ComponentName("com.mbx.settingsmbox", "com.mbx.settingsmbox.SettingsMboxActivity"));
@@ -59,7 +64,9 @@ public class IntentCreator {
     public Intent createAudioIntent() {
         Intent intent = new Intent();
         if (manufature.equals("amlogic")) {
-            if(sdkVersion >= 21) {
+            if (sdkVersion>=25){
+                intent.setComponent(new ComponentName("com.droidlogic.tv.settings", "com.droidlogic.tv.settings.SoundActivity"));
+            }else if(sdkVersion >= 21) {
                 intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.device.sound.SoundActivity"));
             }
         } else if(manufature.equals("rockchip")) {
