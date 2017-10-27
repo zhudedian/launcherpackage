@@ -84,16 +84,6 @@
         android:tag="15"/>
 
     <com.ider.launcherpackage.views.BaseImageView
-        android:id="@+id/main_store"
-        style="@style/MainItemStyle"
-        android:layout_marginTop="362dp"
-        android:layout_marginLeft="529dp"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:package_name="com.android.browser"
-        android:background="@drawable/item_bg"
-        android:tag="16"/>
-    <com.ider.launcherpackage.views.BaseImageView
         android:id="@+id/main_media"
         style="@style/MainItemStyle"
         android:layout_marginTop="362dp"
@@ -107,12 +97,23 @@
         android:id="@+id/main_setting"
         style="@style/MainItemStyle"
         android:layout_marginTop="362dp"
-        android:layout_marginLeft="972dp"
+        android:layout_marginLeft="974dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
         app:package_name="com.android.tv.settings"
         android:background="@drawable/item_bg"
         android:nextFocusRight="@+id/setting_apps"
         android:tag="18"/>
+
+    <com.ider.launcherpackage.views.BaseImageView
+        android:id="@+id/main_store"
+        style="@style/MainItemStyle"
+        android:layout_marginTop="362dp"
+        android:layout_marginLeft="529dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:package_name="com.android.browser"
+        android:background="@drawable/item_bg"
+        android:tag="16"/>
 
 </FrameLayout>

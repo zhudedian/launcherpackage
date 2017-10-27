@@ -1,12 +1,13 @@
 package com.ider.launcherpackage.views;
 
 import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
 
     private Animator animator;
     private String packageName;
+    private int sdkVersion = Build.VERSION.SDK_INT;
 
     public BaseImageView(Context context) {
         this(context, null);
@@ -102,7 +104,21 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
                         getContext().startActivity(intent);
                     }
                 }
-            }  else {
+            } else if (packageName.equals("com.android.browser")) {
+                if (sdkVersion>=25){
+                    intent.setComponent(new ComponentName("org.chromium.webview_shell", "org.chromium.webview_shell.WebViewBrowserActivity"));
+                    //intent.setData(Uri.parse("https://www.google.com/webhp?client=android-google&amp;source=android-home"));
+                }else {
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.android.browser");
+                }
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+                        intent = new Intent(getContext(), AppListActivity.class);
+                        getContext().startActivity(intent);
+                    }
+            } else {
                 intent = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
                 if (intent != null) {
                     getContext().startActivity(intent);

@@ -9,7 +9,7 @@
         android:layout_width="140dp"
         android:layout_height="120dp"
         android:scaleType="fitXY"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/apk_apps"/>
     <TextView

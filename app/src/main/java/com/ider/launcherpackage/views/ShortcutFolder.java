@@ -51,15 +51,15 @@ public class ShortcutFolder extends BaseEntryView {
     public void updateSelf() {
         dbManager = DbManager.getInstance(getContext());
         packages = dbManager.queryPackages((String) getTag());
-        List<PackageHolder> allApp= ApplicationUtil.queryApplication(getContext());
-        List<PackageHolder> removeApp= new ArrayList<>();
-        for (PackageHolder pa:packages){
-            if (!allApp.contains(pa)){
-                removeApp.add(pa);
-                dbManager.removePackage(pa);
-            }
-        }
-        packages.removeAll(removeApp);
+//        List<PackageHolder> allApp= ApplicationUtil.queryApplication(getContext());
+//        List<PackageHolder> removeApp= new ArrayList<>();
+//        for (PackageHolder pa:packages){
+//            if (!allApp.contains(pa)){
+//                removeApp.add(pa);
+//                dbManager.removePackage(pa);
+//            }
+//        }
+//        packages.removeAll(removeApp);
         Bitmap bitmap = mBitmapTools.getFolderThumbnailBitmap(getContext(), packages, thumbnailGrid.getWidth(), thumbnailGrid.getHeight());
         thumbnailGrid.setImageBitmap(bitmap);
 

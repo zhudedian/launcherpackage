@@ -44,9 +44,10 @@ public class IntentCreator {
         Intent intent = new Intent();
         if(manufature.equals("amlogic")) {
             Log.i("tag",sdkVersion+"");
-            if (sdkVersion>=25){
-                intent.setComponent(new ComponentName("com.droidlogic.tv.settings", "com.droidlogic.tv.settings.display.DisplayActivity"));
-            }else if(sdkVersion >= 21) {
+            //if (sdkVersion>=25){
+             //   intent.setComponent(new ComponentName("com.droidlogic.tv.settings", "com.droidlogic.tv.settings.display.DisplayActivity"));
+            //}else
+            if(sdkVersion >= 21) {
 
                 intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.device.display.DisplayActivity"));
             } else {
@@ -64,9 +65,10 @@ public class IntentCreator {
     public Intent createAudioIntent() {
         Intent intent = new Intent();
         if (manufature.equals("amlogic")) {
-            if (sdkVersion>=25){
-                intent.setComponent(new ComponentName("com.droidlogic.tv.settings", "com.droidlogic.tv.settings.SoundActivity"));
-            }else if(sdkVersion >= 21) {
+           // if (sdkVersion>=25){
+            //    intent.setComponent(new ComponentName("com.droidlogic.tv.settings", "com.droidlogic.tv.settings.SoundActivity"));
+           // }else
+            if(sdkVersion >= 21) {
                 intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.device.sound.SoundActivity"));
             }
         } else if(manufature.equals("rockchip")) {
