@@ -6,12 +6,12 @@
 
     <ImageView
         android:id="@+id/home_large_image"
-        android:layout_width="140dp"
-        android:layout_height="120dp"
+        android:layout_width="370dp"
+        android:layout_height="523dp"
         android:scaleType="fitXY"
-        android:layout_marginTop="100dp"
+        android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/apk_apps"/>
+        android:src="@drawable/vip"/>
     <TextView
         android:id="@+id/home_large_text"
         android:layout_width="match_parent"
@@ -19,7 +19,8 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/colorTextGrayWhite"
+        android:background="#53fefdfd"
+        android:textColor="@color/black"
         android:textSize="23sp"
         android:text="@string/applications"/>
 

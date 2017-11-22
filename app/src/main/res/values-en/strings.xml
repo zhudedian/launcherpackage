@@ -5,17 +5,17 @@
     <string name="shortcut_edit_replace">Replace</string>
     <string name="shortcut_edit_delete">Delete</string>
 
-    <string name="applications">Applications</string>
-    <string name="kodi">Kodi</string>
-    <string name="youtube">Youtube</string>
+    <string name="applications">VIP专区</string>
+    <string name="kodi">视频影音</string>
+    <string name="youtube">K歌娱乐</string>
     <string name="googleplay">Google Play</string>
-    <string name="appstore">AppStore</string>
-    <string name="mediacenter">Media Center</string>
-    <string name="setting">Settings</string>
-    <string name="netflix">NETFLIX</string>
-    <string name="browser">Browser</string>
-    <string name="file">File Manager</string>
-    <string name="favorite">Favorite</string>
+    <string name="appstore">Youtube</string>
+    <string name="mediacenter">浏览器</string>
+    <string name="setting">文件管理</string>
+    <string name="netflix">浏览器</string>
+    <string name="browser">Youtube</string>
+    <string name="file">体育赛事</string>
+    <string name="favorite">应用市场</string>
 
     <string name="AppListLongTip">Press menu key to select more</string>
     <string name="app_op_clear_data">Clear Data</string>
@@ -25,5 +25,8 @@
     <string name="app_data_cleaned">Data has been cleaned</string>
     <string name="app_data_forced"> has been stop</string>
     <string name="havent_notice">App does not exist</string>
+
+    <string name="CleanMaster">一键清理</string>
+    <string name="CleanedMemory">清理:%1$s MB \t可用:%2$s M</string>
 
 </resources>

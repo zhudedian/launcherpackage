@@ -21,7 +21,15 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/colorTextGrayWhite"
+        android:background="#42fefdfd"
+        android:textColor="@color/black"
         android:textSize="23sp"/>
+    <ImageView
+        android:id="@+id/home_small_image2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

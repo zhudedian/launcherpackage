@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="apps" />
+    <version value="1" />
+
+    <list>
+        <mapping class="com.ider.launcherpackage.db.MovieApp"/>
+        <mapping class="com.ider.launcherpackage.db.KaraokeApp"/>
+        <mapping class="com.ider.launcherpackage.db.SportsApp"/>
+        <mapping class="com.ider.launcherpackage.db.VipApp"/>
+    </list>
+</litepal>

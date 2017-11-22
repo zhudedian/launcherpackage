@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ider.launcherpackage.views.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ider.launcherpackage.views.SwipeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/function_main"
     android:layout_width="100dp"
     android:layout_height="match_parent"
     android:layout_gravity="right"
     android:orientation="vertical"
+    android:visibility="gone"
     android:paddingTop="150dp"
     android:paddingBottom="70dp">
 

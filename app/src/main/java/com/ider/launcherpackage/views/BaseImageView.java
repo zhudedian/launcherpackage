@@ -25,6 +25,7 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
 
     private Animator animator;
     private String packageName;
+    private String tag;
     private int sdkVersion = Build.VERSION.SDK_INT;
 
     public BaseImageView(Context context) {
@@ -36,6 +37,7 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
         setScaleType(ScaleType.FIT_XY);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BaseImageView);
         this.packageName = typedArray.getString(R.styleable.BaseImageView_package_name);
+        this.tag = (String) getTag();
         typedArray.recycle();
 
         setOnClickListener(this);
@@ -45,6 +47,29 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        if (tag.equals("10")){
+            Intent intent = getContext().getPackageManager().getLaunchIntentForPackage("com.conch.qbtv");
+            if (intent != null) {
+                getContext().startActivity(intent);
+            }else {
+                Toast.makeText(getContext(), getResources().getString(R.string.havent_notice), Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }else if (tag.equals("11")){
+
+
+            return;
+        }else if (tag.equals("12")){
+
+            return;
+        }else if (tag.equals("13")){
+
+            return;
+        }else if (tag.equals("14")){
+            Intent intent = new Intent(getContext(), AppListActivity.class);
+            getContext().startActivity(intent);
+            return;
+        }
         if(packageName != null) {
             Intent intent = new Intent();
             if (packageName.equals("com.android.tv.settings")) {

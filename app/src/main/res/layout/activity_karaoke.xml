@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_karaoke"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_operate_background"
+    tools:context="com.ider.launcherpackage.launcher.KaraokeActivity">
+    <TextView
+        android:id="@+id/folder_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:text="@string/youtube"
+        android:textColor="@color/colorTextGrayWhite"/>
+
+    <GridView
+        android:id="@+id/folder_grid"
+        android:layout_width="800dp"
+        android:layout_height="350dp"
+        android:layout_centerInParent="true"
+        android:transitionName="FolderGrid"
+        android:numColumns="5"
+        android:listSelector="@drawable/selecter"
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp"
+        android:scrollbars="none"
+        android:background="@drawable/folder_background"/>
+</RelativeLayout>

@@ -19,15 +19,21 @@ import static android.R.attr.width;
  */
 
 public class SetImageView {
-    public static Bitmap setSmallImageView(int id,String title){
+    public static Bitmap setSmallImageView(int id,String title,int id2){
         int width =300;
         int height=300;
         View view = View.inflate(LauncherApplication.getContext(), R.layout.home_small_view, null);
         view.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY));
         view.layout(0, 0, width, height);
         RelativeLayout relativeLayout = (RelativeLayout)view;
-        ((ImageView) relativeLayout.getChildAt(0)).setImageBitmap(BitmapFactory.decodeResource(LauncherApplication.getContext().getResources(), id));
+        if(id!=-1) {
+            ((ImageView) relativeLayout.getChildAt(0)).setImageBitmap(BitmapFactory.decodeResource(LauncherApplication.getContext().getResources(), id));
+        }else {
+            if (id2!=-1)
+            ((ImageView) relativeLayout.getChildAt(2)).setImageBitmap(BitmapFactory.decodeResource(LauncherApplication.getContext().getResources(), id2));
+        }
         ((TextView)relativeLayout.getChildAt(1)).setText(title);
+        ((TextView)relativeLayout.getChildAt(1)).bringToFront();
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         view.draw(canvas);

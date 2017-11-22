@@ -6,14 +6,13 @@
     android:id="@+id/content_main"
     android:layout_width="@dimen/screen_width"
     android:layout_height="match_parent"
-    android:background="@drawable/app_operate_background">
+    android:background="@drawable/back1">
 
     <ImageView
         android:id="@+id/vendor_logo"
         android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:src="@drawable/hyfai_logo"
-        android:layout_marginTop="70dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo2"
         android:layout_marginLeft="50dp" />
 
     <include layout="@layout/state_layout"/>
@@ -25,20 +24,45 @@
         android:layout_marginLeft="15dp"
         android:layout_width="370dp"
         android:layout_height="523dp"
+
         android:background="@drawable/item_bg"
         android:tag="10"
-        android:nextFocusRight="@+id/main_kodi"/>
+        android:nextFocusRight="@+id/folder11"/>
+    <com.ider.launcherpackage.views.ShortcutFolder
+        style="@style/MainItemStyle"
+        android:id="@+id/folder10"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="370dp"
+        android:layout_height="523dp"
+        android:visibility="gone"
+        android:background="@drawable/item_bg"
+        android:nextFocusRight="@+id/folder11"
+        android:tag="10"
+        />
 
     <com.ider.launcherpackage.views.BaseImageView
-        android:id="@id/main_kodi"
+        android:id="@+id/main_kodi"
         style="@style/MainItemStyle"
         android:layout_marginTop="140dp"
         android:layout_marginLeft="307dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:visibility="gone"
         app:package_name="org.xbmc.kodi"
         android:background="@drawable/item_bg"
         android:tag="11"/>
+    <com.ider.launcherpackage.views.ShortcutFolder
+        style="@style/MainItemStyle"
+        android:id="@+id/folder11"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="307dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+
+        android:background="@drawable/item_bg"
+        android:tag="11"
+        />
 
     <com.ider.launcherpackage.views.BaseImageView
         android:id="@+id/main_youtube"
@@ -48,9 +72,21 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:tag="12"
+        android:visibility="gone"
         app:package_name="com.google.android.youtube"
         android:background="@drawable/item_bg"/>
 
+    <com.ider.launcherpackage.views.ShortcutFolder
+        style="@style/MainItemStyle"
+        android:id="@+id/folder12"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="529dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+
+        android:background="@drawable/item_bg"
+        android:tag="12"
+        />
     <com.ider.launcherpackage.views.BaseImageView
         android:id="@+id/main_file"
         style="@style/MainItemStyle"
@@ -59,6 +95,28 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:tag="13"
+        android:visibility="gone"
+        app:package_name="com.droidlogic.FileBrower"
+        android:background="@drawable/item_bg"/>
+    <com.ider.launcherpackage.views.ShortcutFolder
+        style="@style/MainItemStyle"
+        android:id="@+id/folder13"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="752dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+
+        android:background="@drawable/item_bg"
+        android:tag="13"
+        />
+    <com.ider.launcherpackage.views.BaseImageView
+        android:id="@+id/main_app_store"
+        style="@style/MainItemStyle"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="974dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:tag="14"
         app:package_name="com.droidlogic.FileBrower"
         android:background="@drawable/item_bg"/>
 
@@ -69,6 +127,7 @@
         android:layout_marginLeft="974dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
+android:visibility="gone"
         android:background="@drawable/item_bg"
         android:tag="14"
         android:nextFocusRight="@+id/setting_display"/>
@@ -90,7 +149,7 @@
         android:layout_marginLeft="752dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="com.netflix.mediaclient"
+        app:package_name="com.android.browser"
         android:background="@drawable/item_bg"
         android:tag="17"/>
     <com.ider.launcherpackage.views.BaseImageView
@@ -100,9 +159,8 @@
         android:layout_marginLeft="974dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="com.android.tv.settings"
+        app:package_name="com.droidlogic.FileBrower"
         android:background="@drawable/item_bg"
-        android:nextFocusRight="@+id/setting_apps"
         android:tag="18"/>
 
     <com.ider.launcherpackage.views.BaseImageView
@@ -112,8 +170,51 @@
         android:layout_marginLeft="529dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="com.android.browser"
+        app:package_name="com.google.android.youtube"
         android:background="@drawable/item_bg"
         android:tag="16"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="400dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="640dp"
+        android:layout_marginLeft="820dp"
+        android:gravity="center">
+        <com.ider.launcherpackage.views.BottomItem
+            android:id="@+id/jia_su"
+            android:layout_width="55dp"
+            android:layout_height="100dp"
+            android:focusable="true"
+            android:tag="1"/>
+
+
+        <com.ider.launcherpackage.views.BottomItem
+            android:id="@+id/wifi"
+            android:layout_width="55dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="40dp"
+            android:focusable="true"
+            android:tag="2"/>
+
+
+        <com.ider.launcherpackage.views.BottomItem
+            android:id="@+id/setting"
+            android:layout_width="55dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="40dp"
+            android:focusable="true"
+            android:tag="3"/>
+
+        <com.ider.launcherpackage.views.BottomItem
+            android:id="@+id/help"
+            android:layout_width="55dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="40dp"
+            android:focusable="true"
+            android:tag="4"/>
+
+    </LinearLayout>
+
+
 
 </FrameLayout>

@@ -5,17 +5,17 @@
     <string name="shortcut_edit_replace">替换</string>
     <string name="shortcut_edit_delete">删除</string>
 
-    <string name="applications">应用</string>
-    <string name="kodi">Kodi</string>
-    <string name="youtube">Youtube</string>
+    <string name="applications">VIP专区</string>
+    <string name="kodi">视频影音</string>
+    <string name="youtube">K歌娱乐</string>
     <string name="googleplay">Google Play</string>
-    <string name="appstore">应用商店</string>
-    <string name="mediacenter">多媒体</string>
-    <string name="setting">设置</string>
-    <string name="netflix">NETFLIX</string>
-    <string name="browser">Browser</string>
-    <string name="file">文件夹</string>
-    <string name="favorite">喜爱</string>
+    <string name="appstore">Youtube</string>
+    <string name="mediacenter">浏览器</string>
+    <string name="setting">文件管理</string>
+    <string name="netflix">浏览器</string>
+    <string name="browser">Youtube</string>
+    <string name="file">体育赛事</string>
+    <string name="favorite">应用市场</string>
 
     <string name="AppListLongTip">按菜单键更多选择</string>
     <string name="app_op_clear_data">删除数据</string>
@@ -25,6 +25,12 @@
     <string name="app_data_cleaned">已清除</string>
     <string name="app_data_forced">已停止</string>
     <string name="havent_notice">该应用不存在</string>
+
+    <string name="help_message">博思數位串流媒體有限公司\n\n公司网址：www.qbtvtw.com\n\n售后服务电话:0908878077</string>
+    <string name="clean">一键清理</string>
+    <string name="wifi">wifi</string>
+    <string name="settings">设置</string>
+    <string name="help">客服</string>
 
     <string name="CleanMaster">CleanUp</string>
     <string name="CleanedMemory">Cleaned up:%1$s MB \tAvailable:%2$s M</string>

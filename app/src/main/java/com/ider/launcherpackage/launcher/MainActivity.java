@@ -6,6 +6,7 @@ import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,6 +28,7 @@ import com.ider.launcherpackage.clean.CleanActivity;
 import com.ider.launcherpackage.common.IntentCreator;
 import com.ider.launcherpackage.util.SetImageView;
 import com.ider.launcherpackage.views.BaseImageView;
+import com.ider.launcherpackage.views.BottomItem;
 import com.ider.launcherpackage.views.ShortcutFolder;
 import com.ider.launcherpackage.views.SwipeLayout;
 
@@ -42,12 +44,14 @@ public class MainActivity extends FullscreenActivity {
     private static final String TAG = "MainActivity";
 
     private ImageView stateWifi, stateBluetooth, stateUsb,sdcard;
+
+    private BottomItem clean,wlan,set,help;
     private View mainContainer;
     private BaseImageView vApps;
     private ShortcutFolder vFolder;
     private SwipeLayout functionContainer;
     private ImageView vSwipClean, vSwipeWifi, vSwipeDisplay, vSwipeAudio, vSwipeApps;
-    private BaseImageView apps,kodi,google,store,youtube,media,setting,file;
+    private BaseImageView apps,kodi,google,store,youtube,media,setting,file,appstore;
     private boolean focusFlag = true;
     private ImageView test;
 
@@ -108,6 +112,7 @@ public class MainActivity extends FullscreenActivity {
         google = (BaseImageView) findViewById(R.id.main_google);
         store = (BaseImageView) findViewById(R.id.main_store);
         setting = (BaseImageView) findViewById(R.id.main_setting);
+        appstore = (BaseImageView)findViewById(R.id.main_app_store);
 
 
         functionContainer = (SwipeLayout) findViewById(R.id.function_main);
@@ -116,6 +121,11 @@ public class MainActivity extends FullscreenActivity {
         vSwipeDisplay = (ImageView) findViewById(R.id.setting_display);
         vSwipeAudio = (ImageView) findViewById(R.id.setting_sound);
         vSwipeApps = (ImageView) findViewById(R.id.setting_apps);
+
+        clean = (BottomItem)findViewById(R.id.jia_su);
+        wlan = (BottomItem)findViewById(R.id.wifi);
+        set= (BottomItem)findViewById(R.id.setting);
+        help = (BottomItem)findViewById(R.id.help);
 
         setListeners();
         bindReceivers();
@@ -134,13 +144,14 @@ public class MainActivity extends FullscreenActivity {
 
     private void setImage(){
         apps.setImageBitmap(SetImageView.setLargeImageView());
-        kodi.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_kodi,getResources().getString(R.string.kodi)));
-        youtube.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.youtube)));
-        file.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.file)));
-        google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay)));
-        store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_browser,getResources().getString(R.string.browser)));
-        media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_netflix,getResources().getString(R.string.netflix)));
-        setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_setting,getResources().getString(R.string.setting)));
+        kodi.setImageBitmap(SetImageView.setSmallImageView(-1,getResources().getString(R.string.kodi),R.drawable.vedio));
+        youtube.setImageBitmap(SetImageView.setSmallImageView(-1,getResources().getString(R.string.youtube),R.drawable.keigeyule));
+        file.setImageBitmap(SetImageView.setSmallImageView(-1,getResources().getString(R.string.file),R.drawable.tiyusaishi));
+        google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay),-1));
+        store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.browser),-1));
+        media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_browser,getResources().getString(R.string.netflix),-1));
+        setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.setting),-1));
+        appstore.setImageBitmap(SetImageView.setSmallImageView(-1,getResources().getString(R.string.favorite),R.mipmap.apk_apps2));
     }
 
 
@@ -195,6 +206,49 @@ public class MainActivity extends FullscreenActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new IntentCreator(MainActivity.this).createAppsIntent();
+                startActivity(intent);
+            }
+        });
+
+        clean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CleanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        wlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new IntentCreator(MainActivity.this).createWifiIntent();
+                startActivity(intent);
+            }
+        });
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.MainSettings"));
+                if (intent != null) {
+                    startActivity(intent);
+                } else {
+                    intent = getPackageManager().getLaunchIntentForPackage("com.mbx.settingsmbox");
+                    if (intent != null) {
+                        startActivity(intent);
+                    } else {
+                        intent = getPackageManager().getLaunchIntentForPackage("com.android.settings");
+                        if (intent != null) {
+                            startActivity(intent);
+                        }
+                    }
+                }
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,HelpActivity.class);
                 startActivity(intent);
             }
         });
@@ -276,6 +330,7 @@ public class MainActivity extends FullscreenActivity {
 //        filter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
 //        filter.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
 //        filter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
+
         filter.addDataScheme("file");
         registerReceiver(mediaReciever, filter);
 
