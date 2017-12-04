@@ -12,8 +12,6 @@ import android.widget.GridView;
 
 import com.ider.launcherpackage.R;
 import com.ider.launcherpackage.db.MovieApp;
-import com.ider.launcherpackage.db.SportsApp;
-import com.ider.launcherpackage.db.VipApp;
 import com.ider.launcherpackage.views.AppSelectWindow;
 
 import org.litepal.crud.DataSupport;
@@ -28,7 +26,7 @@ public class MovieActivity extends AppCompatActivity {
     private GridView gridView;
     private AppAdapter appAdapter;
     private static List<PackageHolder> packages = new ArrayList<>();
-    private List<MovieApp> apps;
+    private static List<MovieApp> apps;
     String tag;
 
     @Override
@@ -45,7 +43,7 @@ public class MovieActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tag = intent.getStringExtra("tag");
 
-        if (packages.size() <1) {
+        if (apps == null) {
            apps = DataSupport.findAll(MovieApp.class);
 
             if (apps.size()>0)
@@ -57,7 +55,7 @@ public class MovieActivity extends AppCompatActivity {
         appAdapter = new AppAdapter(this, packages);
         gridView = (GridView) findViewById(R.id.folder_grid);
 
-        mHandler.postDelayed(showApp, 0);
+        mHandler.postDelayed(showApp, 150);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -105,7 +103,6 @@ public class MovieActivity extends AppCompatActivity {
     Runnable hideApp = new Runnable() {
         @Override
         public void run() {
-            packages.clear();
             appAdapter.notifyDataSetChanged();
             MovieActivity.super.onBackPressed();
         }
@@ -125,7 +122,6 @@ public class MovieActivity extends AppCompatActivity {
                     appAdapter.notifyDataSetChanged();
                     MovieApp app = new MovieApp(holder.getPackageName());
                     app.save();
-                    packages.add(holder);
 //                    holder.setTag(tag);
 //                    DbManager.getInstance(getApplicationContext()).insertPackage(holder);
                 }else {
@@ -134,7 +130,6 @@ public class MovieActivity extends AppCompatActivity {
 //                            Log.i("selectwindow", packages.get(k)+"");
                             Log.i("selectwindow", holder.getPackageName());
                             DataSupport.deleteAll(MovieApp.class,"packageName = ?",holder.getPackageName());
-                            packages.remove(holder);
 //                            DbManager.getInstance(getApplicationContext()).removePackage(holder);
                         }
                     }

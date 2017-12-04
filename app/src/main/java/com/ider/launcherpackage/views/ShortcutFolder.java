@@ -173,7 +173,7 @@ public class ShortcutFolder extends BaseEntryView {
         }else if (tag.equals("10")){
             intent = new Intent(getContext(),VipActivity.class);
         }
-
+        //getContext().startActivity(intent);
         ActivityCompat.startActivity(getContext(), intent, compat.toBundle());
 
     }

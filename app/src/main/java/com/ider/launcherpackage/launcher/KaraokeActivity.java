@@ -26,8 +26,8 @@ public class KaraokeActivity extends AppCompatActivity {
     private Handler mHandler;
     private GridView gridView;
     private AppAdapter appAdapter;
-    private List<PackageHolder> packages = new ArrayList<>();
-    private List<KaraokeApp> apps;
+    private static List<PackageHolder> packages = new ArrayList<>();
+    private static List<KaraokeApp> apps;
     String tag;
 
     @Override
@@ -43,18 +43,18 @@ public class KaraokeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tag = intent.getStringExtra("tag");
-
-        apps = DataSupport.findAll(KaraokeApp.class);
-        if (apps.size()>0)
-            for (KaraokeApp app:apps){
-                packages.add(new PackageHolder(0L,app.getPackageName(),tag));
-            }
-        packages.add(new PackageHolder(0L, "add", tag));
-
+        if (apps == null) {
+            apps = DataSupport.findAll(KaraokeApp.class);
+            if (apps.size() > 0)
+                for (KaraokeApp app : apps) {
+                    packages.add(new PackageHolder(0L, app.getPackageName(), tag));
+                }
+            packages.add(new PackageHolder(0L, "add", tag));
+        }
         appAdapter = new AppAdapter(this, packages);
         gridView = (GridView) findViewById(R.id.folder_grid);
 
-        mHandler.postDelayed(showApp, 100);
+        mHandler.postDelayed(showApp, 150);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -102,7 +102,6 @@ public class KaraokeActivity extends AppCompatActivity {
     Runnable hideApp = new Runnable() {
         @Override
         public void run() {
-            packages.clear();
             appAdapter.notifyDataSetChanged();
             KaraokeActivity.super.onBackPressed();
         }

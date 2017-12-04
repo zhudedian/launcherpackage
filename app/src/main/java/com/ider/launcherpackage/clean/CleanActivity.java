@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -55,7 +56,9 @@ public class CleanActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setContentView(R.layout.activity_clean);
+
         this.df = new DecimalFormat("##0.0");
         this.mHandler = new Handler();
         this.cleaned_memory = (TextView)this.findViewById(R.id.cleanInfo);

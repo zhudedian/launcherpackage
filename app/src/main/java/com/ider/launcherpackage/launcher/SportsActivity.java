@@ -27,8 +27,8 @@ public class SportsActivity extends AppCompatActivity {
     private Handler mHandler;
     private GridView gridView;
     private AppAdapter appAdapter;
-    private List<PackageHolder> packages = new ArrayList<>();
-    private List<SportsApp> apps;
+    private static List<PackageHolder> packages = new ArrayList<>();
+    private static List<SportsApp> apps;
     String tag;
 
     @Override
@@ -44,18 +44,19 @@ public class SportsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tag = intent.getStringExtra("tag");
-
-        apps = DataSupport.findAll(SportsApp.class);
-        if (apps.size()>0)
-            for (SportsApp app:apps){
-                packages.add(new PackageHolder(0L,app.getPackageName(),tag));
-            }
-        packages.add(new PackageHolder(0L, "add", tag));
+        if (apps == null) {
+            apps = DataSupport.findAll(SportsApp.class);
+            if (apps.size() > 0)
+                for (SportsApp app : apps) {
+                    packages.add(new PackageHolder(0L, app.getPackageName(), tag));
+                }
+            packages.add(new PackageHolder(0L, "add", tag));
+        }
 
         appAdapter = new AppAdapter(this, packages);
         gridView = (GridView) findViewById(R.id.folder_grid);
 
-        mHandler.postDelayed(showApp, 100);
+        mHandler.postDelayed(showApp, 150);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -103,7 +104,6 @@ public class SportsActivity extends AppCompatActivity {
     Runnable hideApp = new Runnable() {
         @Override
         public void run() {
-            packages.clear();
             appAdapter.notifyDataSetChanged();
             SportsActivity.super.onBackPressed();
         }

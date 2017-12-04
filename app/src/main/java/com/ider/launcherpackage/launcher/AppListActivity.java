@@ -31,7 +31,7 @@ public class AppListActivity extends FullscreenActivity {
 	Context context = AppListActivity.this;
 	GridView grid;
 	AppAdapter adapter;
-	List<PackageHolder> apps;
+	private static List<PackageHolder> apps;
 	TextView tip;
 	private int selectPosition = 0;
 
@@ -43,8 +43,11 @@ public class AppListActivity extends FullscreenActivity {
 		if (actionBar!=null){
 			actionBar.hide();
 		}
-
-		adapter = new AppAdapter(context, R.layout.applist_item, initApps());
+		if(apps == null) {
+			adapter = new AppAdapter(context, R.layout.applist_item, initApps());
+		}else {
+			adapter = new AppAdapter(context, R.layout.applist_item, apps);
+		}
 		initViews();
 		setListeners();
 		registReceivers();

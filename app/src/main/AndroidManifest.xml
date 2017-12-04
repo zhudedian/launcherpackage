@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ider.launcherpackage"
-
     >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -20,6 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".launcher.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,16 +29,24 @@
 
             </intent-filter>
         </activity>
-        <activity android:name=".launcher.FolderActivity"/>
-        <activity android:name=".launcher.AppListActivity"/>
-        <activity android:name=".clean.CleanActivity"/>
-        <activity android:name=".launcher.SportsActivity">
+        <activity android:name=".launcher.FolderActivity"
+                  android:launchMode="singleTask"/>
+        <activity android:name=".launcher.AppListActivity"
+                  android:launchMode="singleTask"/>
+        <activity android:name=".clean.CleanActivity"
+                  android:theme="@android:style/Theme.Translucent"
+                  android:launchMode="singleTask"/>
+        <activity android:name=".launcher.SportsActivity"
+                  android:launchMode="singleTask">
         </activity>
-        <activity android:name=".launcher.KaraokeActivity">
+        <activity android:name=".launcher.KaraokeActivity"
+                  android:launchMode="singleTask">
         </activity>
-        <activity android:name=".launcher.MovieActivity">
+        <activity android:name=".launcher.MovieActivity"
+                  android:launchMode="singleTask">
         </activity>
-        <activity android:name=".launcher.HelpActivity">
+        <activity android:name=".launcher.HelpActivity"
+                  android:launchMode="singleTask">
         </activity>
         <activity android:name=".launcher.VipActivity">
         </activity>
