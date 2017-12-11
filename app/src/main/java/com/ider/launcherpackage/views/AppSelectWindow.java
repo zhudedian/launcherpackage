@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.ider.launcherpackage.R;
 import com.ider.launcherpackage.common.ApplicationUtil;
@@ -109,9 +110,13 @@ public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemCl
 
                 }else {
                     Log.i("selectwindow",allApps.get(i).getPackageName());
-                    onAppSelectListener.onAppSelected(true,allApps.get(i));
-                    apps.add(apps.size() - 1, allApps.get(i));
-                    adapter.notifyDataSetChanged();
+                    if (apps.size()<9) {
+                        onAppSelectListener.onAppSelected(true, allApps.get(i));
+                        apps.add(apps.size() - 1, allApps.get(i));
+                        adapter.notifyDataSetChanged();
+                    }else {
+                        Toast.makeText(mContext,mContext.getString(R.string.add_max_notice),Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }

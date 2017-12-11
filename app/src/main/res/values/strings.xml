@@ -15,6 +15,7 @@
     <string name="netflix">NETFLIX</string>
     <string name="browser">Browser</string>
     <string name="file">文件夹</string>
+    <string name="facebook">Facebook</string>
     <string name="favorite">喜爱</string>
 
     <string name="AppListLongTip">按菜单键更多选择</string>
@@ -28,5 +29,7 @@
 
     <string name="CleanMaster">CleanUp</string>
     <string name="CleanedMemory">Cleaned up:%1$s MB \tAvailable:%2$s M</string>
+    
+    <string name="add_max_notice">最多只能添加八个！</string>
 
 </resources>

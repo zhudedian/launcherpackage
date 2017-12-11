@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
@@ -19,13 +21,18 @@ import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.ider.launcherpackage.R;
 import com.ider.launcherpackage.clean.CleanActivity;
+import com.ider.launcherpackage.common.ApplicationUtil;
 import com.ider.launcherpackage.common.IntentCreator;
 import com.ider.launcherpackage.util.SetImageView;
+import com.ider.launcherpackage.views.AppSelectWindow;
 import com.ider.launcherpackage.views.BaseImageView;
 import com.ider.launcherpackage.views.ShortcutFolder;
 import com.ider.launcherpackage.views.SwipeLayout;
@@ -33,8 +40,11 @@ import com.ider.launcherpackage.views.SwipeLayout;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
+
+import static android.R.attr.bitmap;
 
 
 public class MainActivity extends FullscreenActivity {
@@ -47,9 +57,15 @@ public class MainActivity extends FullscreenActivity {
     private ShortcutFolder vFolder;
     private SwipeLayout functionContainer;
     private ImageView vSwipClean, vSwipeWifi, vSwipeDisplay, vSwipeAudio, vSwipeApps;
-    private BaseImageView apps,kodi,google,store,youtube,media,setting,file;
+    private BaseImageView apps,kodi,google,store,youtube,media,setting,file,face;
+    private Bitmap kodiBit;
     private boolean focusFlag = true;
     private ImageView test;
+    private GridView gridView;
+    private AppAdapter appAdapter;
+    private List<PackageHolder> packages;
+    private PackageHolder add = new PackageHolder(0L, "add", "20");
+    private boolean firstOpen = true;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -108,7 +124,9 @@ public class MainActivity extends FullscreenActivity {
         google = (BaseImageView) findViewById(R.id.main_google);
         store = (BaseImageView) findViewById(R.id.main_store);
         setting = (BaseImageView) findViewById(R.id.main_setting);
+        face = (BaseImageView)findViewById(R.id.main_face);
 
+        gridView = (GridView) findViewById(R.id.grid_view);
 
         functionContainer = (SwipeLayout) findViewById(R.id.function_main);
         vSwipClean = (ImageView) findViewById(R.id.setting_cleanup);
@@ -116,6 +134,25 @@ public class MainActivity extends FullscreenActivity {
         vSwipeDisplay = (ImageView) findViewById(R.id.setting_display);
         vSwipeAudio = (ImageView) findViewById(R.id.setting_sound);
         vSwipeApps = (ImageView) findViewById(R.id.setting_apps);
+//        kodi.setOnTouchListener(new View.OnTouchListener()
+//        {
+//            @Override
+//            public boolean onTouch(View arg0, MotionEvent arg1)
+//            {
+//
+//                try {
+//                    Log.i("Test", "透明区域" + kodiBit.getPixel((int) (arg1.getX()), ((int) arg1.getY())));
+//                    // TODO Auto-generated method stub
+//                    if (kodiBit.getPixel((int) (arg1.getX()), ((int) arg1.getY())) == 0) {
+//                        Log.i("Test", "透明区域");
+//                        return true;//透明区域返回true
+//                    }
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                return false;
+//            }
+//        });
 
         setListeners();
         bindReceivers();
@@ -123,6 +160,7 @@ public class MainActivity extends FullscreenActivity {
         setUsbState();
         setSdState();
         setImage();
+        initGridView();
 
         try {
             BluetoothManager btManager = (BluetoothManager) getSystemService(Service.BLUETOOTH_SERVICE);
@@ -131,16 +169,47 @@ public class MainActivity extends FullscreenActivity {
             e.printStackTrace();
         }
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        initGridView();
+
+    }
+    private void initGridView(){
+        packages = DbManager.getInstance(getApplicationContext()).queryPackages();
+        if (!firstOpen) {
+            firstOpen = false;
+            List<PackageHolder> allApp = ApplicationUtil.queryApplication(this);
+            List<PackageHolder> removeApp = new ArrayList<>();
+            for (PackageHolder pa : packages) {
+                if (!allApp.contains(pa)) {
+                    removeApp.add(pa);
+                    DbManager.getInstance(getApplicationContext()).removePackage(pa);
+                }
+            }
+            packages.removeAll(removeApp);
+        }
+        Log.i(TAG,"packages.size()="+packages.size());
+        if (packages.size()<9){
+            packages.add(add);
+        }else {
+            packages.remove(add);
+        }
+        appAdapter = new AppAdapter(this, packages);
+        gridView.setAdapter(appAdapter);
+    }
 
     private void setImage(){
         apps.setImageBitmap(SetImageView.setLargeImageView());
         kodi.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_kodi,getResources().getString(R.string.kodi)));
+        kodiBit = ((BitmapDrawable) (kodi.getDrawable())).getBitmap();
         youtube.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.youtube)));
         file.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.file)));
         google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay)));
         store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_browser,getResources().getString(R.string.browser)));
         media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_netflix,getResources().getString(R.string.netflix)));
         setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_setting,getResources().getString(R.string.setting)));
+        face.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_facebook,getString(R.string.facebook)));
     }
 
 
@@ -198,6 +267,58 @@ public class MainActivity extends FullscreenActivity {
                 startActivity(intent);
             }
         });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                PackageHolder holder = packages.get(i);
+                if(holder.getPackageName().equals("add")) {
+                    showAppSelectWindow();
+                } else {
+                    Intent intent = getPackageManager().getLaunchIntentForPackage(holder.getPackageName());
+                    Log.i(TAG, "onItemClick: " + holder.getPackageName());
+                    if(intent != null) {
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
+
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if(packages.get(position).equals(add)) {
+                    return true;
+                }
+                Log.i(TAG,"packages.size()="+packages.size());
+                // 数据库操作类对象
+                DbManager.getInstance(getApplicationContext()).removePackage(packages.get(position));
+                packages.remove(position);
+                initGridView();
+                return true;
+            }
+        });
+    }
+    public void showAppSelectWindow() {
+        AppSelectWindow appSelectWindow = AppSelectWindow.getInstance(this);
+        appSelectWindow.setOnAppSelectListener(new AppSelectWindow.OnAppSelectListener() {
+            @Override
+            public void onAppSelected(boolean isAdd,PackageHolder holder) {
+                if (isAdd) {
+                    holder.setTag("20");
+                    DbManager.getInstance(getApplicationContext()).insertPackage(holder);
+                }else {
+                    for (int k=0;k<packages.size();k++){
+                        if (packages.get(k).getPackageName().equals(holder.getPackageName())){
+//                            Log.i("selectwindow", packages.get(k)+"");
+                            Log.i("selectwindow", holder.getPackageName());
+                            DbManager.getInstance(getApplicationContext()).removePackage(holder);
+                        }
+                    }
+                }
+                initGridView();
+            }
+        });
+        appSelectWindow.showAppPopWindow(packages,gridView);
     }
 
 

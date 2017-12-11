@@ -61,7 +61,18 @@
         android:tag="13"
         app:package_name="com.droidlogic.FileBrower"
         android:background="@drawable/item_bg"/>
+    <com.ider.launcherpackage.views.BaseImageView
+        style="@style/MainItemStyle"
+        android:id="@+id/main_face"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="974dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/item_bg"
+        android:tag="14"
 
+        app:package_name="com.facebook.katana"
+        android:nextFocusRight="@+id/setting_display"/>
     <com.ider.launcherpackage.views.ShortcutFolder
         style="@style/MainItemStyle"
         android:id="@+id/folder14"
@@ -71,6 +82,7 @@
         android:layout_height="300dp"
         android:background="@drawable/item_bg"
         android:tag="14"
+        android:visibility="gone"
         android:nextFocusRight="@+id/setting_display"/>
     <com.ider.launcherpackage.views.BaseImageView
         android:id="@+id/main_google"
@@ -115,5 +127,12 @@
         app:package_name="com.android.browser"
         android:background="@drawable/item_bg"
         android:tag="16"/>
-
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="60dp"
+        android:numColumns="9"
+        android:listSelector="@drawable/grid_selecter"></GridView>
 </FrameLayout>

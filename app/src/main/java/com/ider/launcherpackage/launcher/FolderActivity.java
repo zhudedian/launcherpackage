@@ -91,6 +91,7 @@ public class FolderActivity extends FullscreenActivity {
 
     }
 
+
     Runnable showApp = new Runnable() {
         @Override
         public void run() {

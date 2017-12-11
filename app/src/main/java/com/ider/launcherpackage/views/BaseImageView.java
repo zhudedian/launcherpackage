@@ -46,6 +46,9 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(packageName != null) {
+//            if (packageName.equals("org.xbmc.kodi")) {
+//                return;
+//            }
             Intent intent = new Intent();
             if (packageName.equals("com.android.tv.settings")) {
                 intent.setComponent(new ComponentName("com.android.tv.settings", "com.android.tv.settings.MainSettings"));
@@ -106,8 +109,13 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
                 }
             } else if (packageName.equals("com.android.browser")) {
                 if (sdkVersion>=25){
-                    intent.setComponent(new ComponentName("org.chromium.webview_shell", "org.chromium.webview_shell.WebViewBrowserActivity"));
-                    //intent.setData(Uri.parse("https://www.google.com/webhp?client=android-google&amp;source=android-home"));
+                    intent = getContext().getPackageManager().getLaunchIntentForPackage("com.android.chrome");
+                    if (intent != null) {
+                        getContext().startActivity(intent);
+                    }else {
+                        intent.setComponent(new ComponentName("org.chromium.webview_shell", "org.chromium.webview_shell.WebViewBrowserActivity"));
+                    }
+                        //intent.setData(Uri.parse("https://www.google.com/webhp?client=android-google&amp;source=android-home"));
                 }else {
                     intent = getContext().getPackageManager().getLaunchIntentForPackage("com.android.browser");
                 }

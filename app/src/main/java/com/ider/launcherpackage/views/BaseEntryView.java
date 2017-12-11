@@ -1,20 +1,12 @@
 package com.ider.launcherpackage.views;
 
 import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Outline;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewOutlineProvider;
-import android.view.animation.Animation;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.ider.launcherpackage.R;
 import com.ider.launcherpackage.common.BitmapTools;
 import com.ider.launcherpackage.common.EntryAnimation;
 import com.ider.launcherpackage.launcher.MainActivity;
@@ -54,9 +46,9 @@ public abstract class BaseEntryView extends RelativeLayout implements View.OnCli
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         super.onWindowFocusChanged(hasWindowFocus);
         if (MainActivity.isFirstIn(getContext())) {
-            setDefault();
+            //setDefault();
         } else {
-            updateSelf();
+            //updateSelf();
         }
     }
 

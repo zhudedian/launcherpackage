@@ -15,6 +15,7 @@
     <string name="netflix">NETFLIX</string>
     <string name="browser">Browser</string>
     <string name="file">File Manager</string>
+    <string name="facebook">Facebook</string>
     <string name="favorite">Favorite</string>
 
     <string name="AppListLongTip">Press menu key to select more</string>
@@ -25,5 +26,5 @@
     <string name="app_data_cleaned">Data has been cleaned</string>
     <string name="app_data_forced"> has been stop</string>
     <string name="havent_notice">App does not exist</string>
-
+    <string name="add_max_notice">Only eight can be added at most！</string>
 </resources>

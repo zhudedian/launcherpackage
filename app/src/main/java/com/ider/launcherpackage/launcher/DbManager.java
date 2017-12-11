@@ -76,6 +76,15 @@ public class DbManager {
             return queryBuilder.list();
         }
     }
+    public List<PackageHolder> queryPackages() {
+        synchronized (DbManager.class) {
+            DaoMaster master = new DaoMaster(getWritableDatabase());
+            DaoSession session = master.newSession();
+            PackageHolderDao dao = session.getPackageHolderDao();
+            QueryBuilder<PackageHolder> queryBuilder = dao.queryBuilder();
+            return queryBuilder.list();
+        }
+    }
 
     public void removePackage(PackageHolder holder) {
         synchronized (DbManager.class) {
