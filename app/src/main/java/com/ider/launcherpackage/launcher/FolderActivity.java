@@ -1,10 +1,14 @@
 package com.ider.launcherpackage.launcher;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -88,9 +92,42 @@ public class FolderActivity extends FullscreenActivity {
                 return true;
             }
         });
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        registerReceiver(mHomeKeyEventReceiver, filter);
 
     }
+    private BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {
+        String SYSTEM_REASON = "reason";
+        String SYSTEM_HOME_KEY = "homekey";
+        String SYSTEM_HOME_KEY_LONG = "recentapps";
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+                String reason = intent.getStringExtra(SYSTEM_REASON);
+                if (TextUtils.equals(reason, SYSTEM_HOME_KEY)) {
+                    //表示按了home键,程序到了后台
+                    //Log.i(TAG,"SYSTEM_HOME_KEY");
+                    AppSelectWindow.dismiss();
+                    FolderActivity.this.finish();
+                }else if(TextUtils.equals(reason, SYSTEM_HOME_KEY_LONG)){
+                    //表示长按home键,显示最近使用的程序列表
+                    //Log.i(TAG,"SYSTEM_HOME_KEY_LONG");
+                    AppSelectWindow.dismiss();
+                    FolderActivity.this.finish();
+                }
+            }
+        }
+    };
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if (mHomeKeyEventReceiver!=null) {
+            unregisterReceiver(mHomeKeyEventReceiver);
+        }
+    }
     Runnable showApp = new Runnable() {
         @Override
         public void run() {

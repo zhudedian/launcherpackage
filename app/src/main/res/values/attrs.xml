@@ -7,4 +7,8 @@
     <declare-styleable name="ShortcutFolder">
         <attr name="default_packages" format="string"/>
     </declare-styleable>
+    <declare-styleable name="KeyItem">
+        <attr name="key_num" format="reference"/>
+        <attr name="key_icon" format="integer"/>
+    </declare-styleable>
 </resources>

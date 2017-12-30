@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ider.launcherpackage"
-    >
+          package="com.ider.launcherpackage"
+          android:sharedUserId="android.uid.system">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 
     <application
@@ -20,15 +20,17 @@
             android:name=".launcher.MainActivity"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".launcher.FolderActivity" />
-        <activity android:name=".launcher.AppListActivity" />
-        <activity android:name=".clean.CleanActivity"></activity>
+        <activity android:name=".launcher.FolderActivity"/>
+        <activity android:name=".launcher.AppListActivity"/>
+        <activity android:name=".clean.CleanActivity"/>
+        <activity android:name=".fastkey.FastKeyActivity">
+        </activity>
     </application>
 
 </manifest>

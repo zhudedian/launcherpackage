@@ -9,6 +9,7 @@
     <string name="kodi">Kodi</string>
     <string name="youtube">Youtube</string>
     <string name="googleplay">Google Play</string>
+    <string name="longshi">龙视TV</string>
     <string name="appstore">应用商店</string>
     <string name="mediacenter">多媒体</string>
     <string name="setting">设置</string>
@@ -24,6 +25,9 @@
     <string name="app_data_forced">已停止</string>
     <string name="havent_notice">该应用不存在</string>
 
+    <string name="add_keytip"> 点击选择应用</string>
+    <string name="remove_keytip"> 长按ok移除应用</string>
+    <string name="nullapp">您还没有配置该应用！！！</string>
     <string name="CleanMaster">CleanUp</string>
     <string name="CleanedMemory">Cleaned up:%1$s MB \tAvailable:%2$s M</string>
 

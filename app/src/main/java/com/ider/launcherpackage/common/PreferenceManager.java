@@ -10,12 +10,13 @@ import android.content.SharedPreferences;
 public class PreferenceManager {
 
     private SharedPreferences preferences;
-
+    SharedPreferences.Editor editor;
 
     private static PreferenceManager INSTANCE;
 
     private PreferenceManager(Context context) {
         this.preferences = context.getSharedPreferences("launcher_config", Context.MODE_PRIVATE);
+        editor = preferences.edit();
     }
 
     public static PreferenceManager getInstance(Context context) {
@@ -34,7 +35,18 @@ public class PreferenceManager {
         editor.putString(key, value);
         editor.apply();
     }
-
+    public String getKeyPackage(int keycode) {
+        String key = String.valueOf(keycode);
+        return preferences.getString(key, null);
+    }
+    public void removeKeyPackage(int keycode) {
+        editor.remove(String.valueOf(keycode));
+        editor.commit();
+    }
+    public void setKeyPackage(int keycode, String packageName) {
+        editor.putString(String.valueOf(keycode), packageName);
+        editor.commit();
+    }
     public synchronized void remove(String key) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(key);

@@ -24,7 +24,7 @@ public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemCl
     private Context mContext;
     private List<PackageHolder> allApps,apps;
     private View baseView;
-    private PopupWindow popWindow;
+    private static PopupWindow popWindow;
     private static AppSelectWindow INSTANCE;
     private OnAppSelectListener onAppSelectListener;
     private SelectAdapter adapter;
@@ -72,7 +72,12 @@ public class AppSelectWindow implements View.OnKeyListener, AdapterView.OnItemCl
         gridView.setAdapter(adapter);
     }
 
-
+    public static void dismiss(){
+        if (popWindow!=null&&popWindow.isShowing()){
+            popWindow.dismiss();
+        }
+        popWindow = null;
+    }
 
     @Override
     public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {

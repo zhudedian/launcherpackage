@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/app_operate_background"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:src="@mipmap/fastkeytitle"
+        />
+    <RelativeLayout
+        android:layout_width="620dp"
+        android:layout_height="520dp"
+        android:background="@mipmap/fasykey_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        >
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_1"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="25dp"
+            app:key_num="@mipmap/num1" />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_2"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="230dp"
+            android:layout_marginTop="25dp"
+            app:key_num="@mipmap/num2"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_3"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="430dp"
+            app:key_num="@mipmap/num3"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_4"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="150dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            app:key_num="@mipmap/num4"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_5"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="230dp"
+            app:key_num="@mipmap/num5"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_6"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginLeft="430dp"
+            app:key_num="@mipmap/num6"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_7"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="275dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            app:key_num="@mipmap/num7"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_8"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="275dp"
+            android:layout_marginLeft="230dp"
+            app:key_num="@mipmap/num8"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_9"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="275dp"
+            android:layout_marginLeft="430dp"
+            app:key_num="@mipmap/num9"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_tv"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="400dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="30dp"
+            app:key_num="@mipmap/key_tv"
+            app:key_icon="1"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_0"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginLeft="230dp"
+            app:key_num="@mipmap/num0"
+            />
+
+        <com.ider.launcherpackage.fastkey.KeyItem
+            android:id="@+id/key_vod"
+            android:layout_width="160dp"
+            android:layout_height="95dp"
+            android:layout_marginTop="400dp"
+            android:layout_marginLeft="430dp"
+            app:key_num="@mipmap/key_vod"
+            app:key_icon="1"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/select_tip"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        />
+</RelativeLayout>

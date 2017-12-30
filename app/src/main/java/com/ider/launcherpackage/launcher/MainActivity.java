@@ -19,12 +19,18 @@ import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.ider.launcherpackage.R;
 import com.ider.launcherpackage.clean.CleanActivity;
+import com.ider.launcherpackage.common.ApplicationUtil;
 import com.ider.launcherpackage.common.IntentCreator;
+import com.ider.launcherpackage.common.PreferenceManager;
+import com.ider.launcherpackage.fastkey.Application;
+import com.ider.launcherpackage.fastkey.FastKeyActivity;
 import com.ider.launcherpackage.util.SetImageView;
 import com.ider.launcherpackage.views.BaseImageView;
 import com.ider.launcherpackage.views.ShortcutFolder;
@@ -46,8 +52,9 @@ public class MainActivity extends FullscreenActivity {
     private BaseImageView vApps;
     private ShortcutFolder vFolder;
     private SwipeLayout functionContainer;
+    private PreferenceManager pmanager;
     private ImageView vSwipClean, vSwipeWifi, vSwipeDisplay, vSwipeAudio, vSwipeApps;
-    private BaseImageView apps,kodi,google,store,youtube,media,setting,file;
+    private BaseImageView apps,kodi,longshi,store,youtube,media,setting,file;
     private boolean focusFlag = true;
     private ImageView test;
 
@@ -69,7 +76,7 @@ public class MainActivity extends FullscreenActivity {
         if (actionBar!=null){
             actionBar.hide();
         }
-
+        pmanager = PreferenceManager.getInstance(this);
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -105,7 +112,7 @@ public class MainActivity extends FullscreenActivity {
         youtube = (BaseImageView) findViewById(R.id.main_youtube);
         file = (BaseImageView) findViewById(R.id.main_file);
         media = (BaseImageView) findViewById(R.id.main_media);
-        google = (BaseImageView) findViewById(R.id.main_google);
+        longshi = (BaseImageView) findViewById(R.id.main_longshi);
         store = (BaseImageView) findViewById(R.id.main_store);
         setting = (BaseImageView) findViewById(R.id.main_setting);
 
@@ -137,7 +144,7 @@ public class MainActivity extends FullscreenActivity {
         kodi.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_kodi,getResources().getString(R.string.kodi)));
         youtube.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_youtube,getResources().getString(R.string.youtube)));
         file.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_file,getResources().getString(R.string.file)));
-        google.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_google,getResources().getString(R.string.googleplay)));
+        longshi.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_longshi,getResources().getString(R.string.longshi)));
         store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_store,getResources().getString(R.string.appstore)));
         media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_media,getResources().getString(R.string.mediacenter)));
         setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_setting,getResources().getString(R.string.setting)));
@@ -200,7 +207,32 @@ public class MainActivity extends FullscreenActivity {
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.i(TAG, "onKeyDown: keyCode=" + keyCode);
 
+        if (keyCode == KeyEvent.KEYCODE_0||keyCode == KeyEvent.KEYCODE_1|| keyCode == KeyEvent.KEYCODE_2 || keyCode == KeyEvent.KEYCODE_3
+                || keyCode == KeyEvent.KEYCODE_4 || keyCode == KeyEvent.KEYCODE_5 || keyCode == KeyEvent.KEYCODE_6
+                || keyCode == KeyEvent.KEYCODE_7 || keyCode == KeyEvent.KEYCODE_8 || keyCode == KeyEvent.KEYCODE_9
+                || keyCode == KeyEvent.KEYCODE_BOOKMARK || keyCode == KeyEvent.KEYCODE_CAPTIONS) {
+            String pkg = pmanager.getKeyPackage(keyCode);
+            if (pkg != null) {
+                Application app = ApplicationUtil.doApplication(this, pkg);
+                if (app != null) {
+                    ApplicationUtil.startApp(MainActivity.this, app);
+                }
+            } else {
+                Intent intent = null ;
+                Toast.makeText(MainActivity.this, R.string.nullapp, Toast.LENGTH_LONG).show();
+                intent = new Intent(MainActivity.this, FastKeyActivity.class);
+                startActivity(intent);
+            }
+        }else if (keyCode == KeyEvent.KEYCODE_DVR){
+            Intent intent = new Intent(MainActivity.this, AppListActivity.class);
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     private void setUsbState() {
         if(isUsbExists()) {
             stateUsb.setVisibility(View.VISIBLE);

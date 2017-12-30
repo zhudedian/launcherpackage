@@ -12,6 +12,7 @@
         android:id="@+id/vendor_logo"
         android:layout_width="250dp"
         android:layout_height="50dp"
+        android:visibility="gone"
         android:src="@drawable/vendor_logo"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="50dp" />
@@ -73,13 +74,13 @@
         android:tag="14"
         android:nextFocusRight="@+id/setting_display"/>
     <com.ider.launcherpackage.views.BaseImageView
-        android:id="@+id/main_google"
+        android:id="@+id/main_longshi"
         style="@style/MainItemStyle"
         android:layout_marginTop="362dp"
         android:layout_marginLeft="307dp"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:package_name="com.android.vending"
+        app:package_name="cn.dolit.wenzhoutv"
         android:background="@drawable/item_bg"
         android:tag="15"/>
 
