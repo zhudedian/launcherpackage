@@ -209,7 +209,7 @@ public class MainActivity extends FullscreenActivity {
         store.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_browser,getResources().getString(R.string.browser)));
         media.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_netflix,getResources().getString(R.string.netflix)));
         setting.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_setting,getResources().getString(R.string.setting)));
-        face.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_facebook,getString(R.string.facebook)));
+        face.setImageBitmap(SetImageView.setSmallImageView(R.mipmap.apk_es,getString(R.string.es_file)));
     }
 
 

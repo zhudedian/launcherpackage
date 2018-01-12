@@ -16,6 +16,7 @@
     <string name="browser">Browser</string>
     <string name="file">文件夹</string>
     <string name="facebook">Facebook</string>
+    <string name="es_file">ES管理器</string>
     <string name="favorite">喜爱</string>
 
     <string name="AppListLongTip">按菜单键更多选择</string>

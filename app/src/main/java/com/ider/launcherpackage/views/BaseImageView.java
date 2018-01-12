@@ -113,6 +113,7 @@ public class BaseImageView extends ImageView implements View.OnClickListener{
                     if (intent != null) {
                         getContext().startActivity(intent);
                     }else {
+                        intent = new Intent();
                         intent.setComponent(new ComponentName("org.chromium.webview_shell", "org.chromium.webview_shell.WebViewBrowserActivity"));
                     }
                         //intent.setData(Uri.parse("https://www.google.com/webhp?client=android-google&amp;source=android-home"));

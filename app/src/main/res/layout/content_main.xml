@@ -71,7 +71,7 @@
         android:background="@drawable/item_bg"
         android:tag="14"
 
-        app:package_name="com.facebook.katana"
+        app:package_name="com.estrongs.android.pop"
         android:nextFocusRight="@+id/setting_display"/>
     <com.ider.launcherpackage.views.ShortcutFolder
         style="@style/MainItemStyle"
